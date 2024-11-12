@@ -3,13 +3,13 @@
       {
         "user_id": 1,
         "user_name": "Alice Dupont",
-        "user_email": "alice.dupont@example.com",
+        "user_email": "alice.dupont@yahoo.com",
         "user_password": ""
       },
       {
         "user_id": 2,
         "user_name": "Bob Martin",
-        "user_email": "bob.martin@example.com",
+        "user_email": "bob.martin@gmail.com",
         "user_password": ""
       }
     ],
