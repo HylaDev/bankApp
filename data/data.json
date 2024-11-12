@@ -1,0 +1,73 @@
+{
+    "users": [
+      {
+        "user_id": 1,
+        "user_name": "Alice Dupont",
+        "user_email": "alice.dupont@example.com",
+        "user_password": ""
+      },
+      {
+        "user_id": 2,
+        "user_name": "Bob Martin",
+        "user_email": "bob.martin@example.com",
+        "user_password": ""
+      }
+    ],
+    "accounts": [
+      {
+        "account_id": 101,
+        "account_user": 1,
+        "account_name": "Compte Courant",
+        "account_type": "courant",
+        "account_balance": 1500,
+        "account_threshold": 50 
+      },
+      {
+        "account_id": 102,
+        "account_user": 1,
+        "account_name": "Compte Épargne",
+        "account_type": "épargne",
+        "account_balance": 3000,
+        "account_threshold": 50
+      },
+      {
+        "account_id": 201,
+        "account_user": 2,
+        "account_name": "Compte Courant",
+        "account_type": "courant",
+        "account_balance": 750,
+        "account_threshold": 100
+      }
+    ],
+    "transactions": [
+      {
+        "transaction_id": 1001,
+        "transaction_account": 101,
+        "transaction_type": "dépôt",
+        "transaction_amount": 500,
+        "transaction_date": "2023-10-12T10:30:00Z"
+      },
+      {
+        "transaction_id": 1002,
+        "transaction_account": 101,
+        "transaction_type": "retrait",
+        "transaction_amount": 250,
+        "transaction_date": "2023-11-01T12:15:00Z"
+      },
+      {
+        "transaction_id": 2001,
+        "transaction_account": 102,
+        "transaction_type": "dépôt",
+        "transaction_amount": 1000,
+        "transaction_date": "2023-10-15T09:45:00Z"
+      },
+      {
+        "transaction_id": 3001,
+        "transaction_account": 201,
+        "transaction_type": "dépôt",
+        "transaction_amount": 500,
+        "transaction_date": "2023-10-20T14:20:00Z"
+      }
+    ]
+  }
+  
