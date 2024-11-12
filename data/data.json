@@ -1,16 +1,16 @@
 {
     "users": [
       {
-        "user_id": 1,
-        "user_name": "Alice Dupont",
-        "user_email": "alice.dupont@example.com",
-        "user_password": ""
+        "id": 1,
+        "name": "Alice Dupont",
+        "email": "alice.dupont@example.com",
+        "password": ""
       },
       {
-        "user_id": 2,
-        "user_name": "Bob Martin",
-        "user_email": "bob.martin@example.com",
-        "user_password": ""
+        "id": 2,
+        "name": "Bob Martin",
+        "email": "bob.martin@example.com",
+        "password": ""
       }
     ],
     "accounts": [
