@@ -1,30 +1,93 @@
-import userExists from '../../services/checkUser/index.js';
+import readData from '../../services/readData/index.js';
+import hashPassword from '../../services/hashPassWord/index.js';
 import express from 'express';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.join(__dirname, '../../../data/data.json');
+
+
+const saveData = (data) => {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
+};
 
 const router = express.Router();
-router.get("/", (req, res) => {
-    res.send({ message: "users" });
+
+  // list users
+  router.get("/", (req, res) => {
+    const users = readData();
+    res.status(200).json(users);
     });
-
-
-router.post("register", async (req, res) => {
-    
-    const {nom, email, password} = req.body;
-    console.log(req.body);
-    
-    /*try {
-        if (userExists(email)) {
-            console.log("Le user existe");
-            res.status(400).json({ message: "L'utilisateur existe déjà" });
-          } else {
-            console.log("Le user n'existe pas");
-            res.status(200).json({ message: "Utilisateur créé" });
-          }
+  
+    // create users
+  router.post('/register', async (req, res) => {
+      const {name, email, pass} = req.body;
+      if (!name || !email || !pass) {
+        return res.status(400).json({ message: 'name, email, and pass are required.' });
     }
-    catch (error) {
-        console.log(error)
-        return res.status(500).json({ message: "Erreur de serveur" });
-      }*/
 
-}); 
+    const users = readData();
+
+    const userExists = users.some((user) => user.email === email);
+
+    if (userExists) {
+        return res.status(409).json({ message: 'User already exists.' });
+    }
+    const password = await hashPassword(pass);
+
+    const newUser = { name, email, password };
+    users.push(newUser);
+    saveData(users);
+
+    res.status(201).json({ message: 'User registered successfully.', user: newUser });
+});
+
+  // create bank account for user
+  router.post('/create-account', (req, res) => {
+    const { email, accountType, initialBalance } = req.body;
+
+    if (!email || !accountType || initialBalance === undefined) {
+        return res.status(400).json({ message: 'email, account type, and initial balance are required.' });
+    }
+
+    const users = readData();
+    const user = users.find((user) => user.email === email);
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+    }
+    if (!user.accounts) {
+      user.accounts = [];
+  }
+    const newAccount = {
+        accountNumber: `ACC-${Date.now()}`,
+        accountType,
+        balance: initialBalance
+    };
+
+    user.accounts.push(newAccount);
+    saveData(users);
+
+    res.status(201).json({ message: 'Bank account created successfully.', account: newAccount });
+  });
+
+  // list user accounts
+  router.get('/:email/accounts', (req, res) => {
+    const { email } = req.params;
+
+    const users = readData();
+    const user = users.find((user) => user.email === email);
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+    }
+
+    res.status(200).json(user.accounts);
+  });
+
+
  export default router;
