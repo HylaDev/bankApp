@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import generateJwt from '../../services/jwt/index.js';
 import isAuthenticated from '../../../middlewares/isAuth/index.js';
+import {checkAccountBalance} from '../../services/checkAccounts/index.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,11 +21,19 @@ const saveData = (data) => {
 
 const router = express.Router();
 
-  // list users
-  router.get("/", isAuthenticated, async (req, res) => {
-    const users = readData();
-    res.status(200).json(users);
-    });
+router.get("/profile", isAuthenticated, async (req, res) => {
+  const email = req.user.email;
+
+  const users = readData();
+  const user = users.find((user) => user.email === email);
+
+  if (!user) {
+      return res.status(404).json({ message: "User not found" });
+  }
+  
+  res.status(200).json({ user: user });
+});
+
   
     // create users
   router.post('/register', async (req, res) => {
@@ -54,7 +63,7 @@ const router = express.Router();
     const userToken = await generateJwt(payload);
     res.cookie("auth_token", userToken, { httpOnly: true});
 
-    res.status(201).json({ message: 'User registered and login successfully.', userEmail: newUser.email,userName: newUser.name, userToken: userToken});
+    res.status(201).json({ message: 'User registered and login successfully.', user: newUser.email, userToken: userToken});
 });
 
   // login user
@@ -83,22 +92,20 @@ const router = express.Router();
       };
       const userToken = await generateJwt(payload);
       res.cookie("auth_token", userToken, { httpOnly: true});
-      return res.status(200).json({message:"user login", userToken:userToken, userEmail:user.email, userName: user.name})
+      return res.status(200).json({message:"user login", userToken:userToken, user:user.email})
     }
     return res.status(409).json({message:"connexion echouée"})
 
   });
 
   // Logout user
-  router.get('/logout', isAuthenticated, async(req, res) => {
-    // get token from cookie and clear it
-      const userToken = req.cookies.auth_token;
-      if (!userToken) {
-        return res.status(404).json({message: "Token not found, you are not logged"});
-      }
-      res.clearCookie('auth_token');
-      res.status(200).json({message:  "User logout successfully"});
+  router.post("/logout", isAuthenticated, (req, res) => {
+    // Effacez le cookie contenant le jeton JWT
+    res.clearCookie("auth_token", { httpOnly: true, secure: true });
+    
+    res.status(200).json({ message: "Logout successful" });
   });
+
 
   // create bank account for user
   router.post('/create-account', isAuthenticated, async (req, res) => {
@@ -106,6 +113,11 @@ const router = express.Router();
 
     if (!email || !accountType || initialBalance === undefined) {
         return res.status(400).json({ message: 'email, account type, and initial balance are required.' });
+    }
+    
+    const parsedInitialB = parseFloat(initialBalance);
+    if (isNaN(parsedInitialB) || parsedInitialB <= 0) {
+        return res.status(400).json({ message: "Invalid amount. Amount must be a positive number." });
     }
 
     const users = readData();
@@ -120,7 +132,7 @@ const router = express.Router();
     const newAccount = {
         accountNumber: `ACC-${Date.now()}`,
         accountType,
-        balance: initialBalance,
+        balance: parsedInitialB,
         threshold: 50,
     };
 
@@ -146,11 +158,16 @@ const router = express.Router();
 
   // add transaction to user
   router.post("/add/transaction", isAuthenticated, async (req, res) =>{
-    const {email, transactionType, amount, date} = req.body;
+    const {email, accountType, transactionType, amount, date} = req.body;
 
 
     if (!email || !transactionType || !amount || !date){
       res.status(400).json({message: "email, transactionType, amount and date are required"});
+    }
+
+    const parsedAmount = parseFloat(amount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+        return res.status(400).json({ message: "Invalid amount. Amount must be a positive number." });
     }
 
     const users = readData();
@@ -158,21 +175,63 @@ const router = express.Router();
     if(!user){
       return res.status(404).json({message:"user not found"});
     }
-
-    if (!user.transactions) {
-      user.transactions = [];
+    if (!user.accounts){
+      res.status(404).json({message:"user doesn't have account"})
     }
+
+    const account = user.accounts.find((acc) => acc.accountType == accountType);
+    console.log(account)
+    if(!account){
+      res.status(404).json({message:"user doesn't have this account type"})
+    }
+
+    if (!account.transactions) {
+      account.transactions = [];
+    }
+
+    if (transactionType === "Retrait") {
+        if (account.balance < parsedAmount) {
+            return res.status(400).json({ message: "Insufficient balance" });
+        }
+        account.balance -= parsedAmount;
+    } else if (transactionType === "Depot") {
+        account.balance += parsedAmount;
+    } else {
+        return res.status(400).json({ message: "Invalid transaction type" });
+    }
+    
     
     const userTransaction = {
       transactionType, 
-      amount,
+      amount: parsedAmount,
       date
     }
-    user.transactions.push(userTransaction)
+    account.transactions.push(userTransaction);
 
     saveData(users);
     res.status(200).json({message:"transaction added", transaction: userTransaction })
 
   })
+
+  
+  router.get("/totalBalance", isAuthenticated, async (req, res) => {
+    const { email } = req.query;
+
+    const users = readData();
+    const user = users.find((user) => user.email === email);
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.accounts || !Array.isArray(user.accounts)) {
+        return res.status(404).json({ message: "User doesn't have any accounts" });
+    }
+
+    const totalBalance = user.accounts.reduce((sum, account) => sum + account.balance, 0);
+
+    res.status(200).json({ totalBalance });
+  });
+
 
  export default router;
