@@ -43,12 +43,12 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response);
                 $('#signupForm').trigger('reset');
-                // $('#success-message').text('Votre inscription a bien été prise en compte! Vous pouvez vous connecter maintenant.').show();
-                alert('Inscription reusi')
+                $('#success-message').text('Votre inscription a bien été prise en compte! Vous allez être redirigé vers le tableau de bord.').show();
+                window.location.replace('dashbord.html');
             },
             error: function(error) {
                 console.error(error);
-                // $('#error-message').text('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.').show();
+                $('#error-message').text('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.').show();
             }
         })
     })
