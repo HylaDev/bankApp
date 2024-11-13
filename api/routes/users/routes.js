@@ -21,11 +21,19 @@ const saveData = (data) => {
 
 const router = express.Router();
 
-  // list users
-  router.get("/", isAuthenticated, async (req, res) => {
-    const users = readData();
-    res.status(200).json(users);
-    });
+router.get("/profile", isAuthenticated, async (req, res) => {
+  const email = req.user.email;
+
+  const users = readData();
+  const user = users.find((user) => user.email === email);
+
+  if (!user) {
+      return res.status(404).json({ message: "User not found" });
+  }
+  
+  res.status(200).json({ user: user });
+});
+
   
     // create users
   router.post('/register', async (req, res) => {
@@ -55,7 +63,7 @@ const router = express.Router();
     const userToken = await generateJwt(payload);
     res.cookie("auth_token", userToken, { httpOnly: true});
 
-    res.status(201).json({ message: 'User registered and login successfully.', user: newUser.email, userToken: userToken});
+    res.status(201).json({ message: 'User registered and login successfully.', user: newUser, userToken: userToken});
 });
 
   // login user
@@ -81,23 +89,21 @@ const router = express.Router();
         pass: user.password,
       };
       const userToken = await generateJwt(payload);
-      res.cookie("auth_token", userToken, { httpOnly: true});
-      return res.status(200).json({message:"user login", userToken:userToken, user:user.email})
+      res.cookie("auth_token", userToken, {  httpOnly: true, secure: true, maxAge: 3600000});
+      return res.status(200).json({message:"user login", userToken:userToken, user:user})
     }
     return res.status(409).json({message:"user doesn't login"})
 
   });
 
   // Logout user
-  router.get('/logout', isAuthenticated, async(req, res) => {
-    // get token from cookie and clear it
-      const userToken = req.cookies.auth_token;
-      if (!userToken) {
-        return res.status(404).json({message: "Token not found, you are not logged"});
-      }
-      res.clearCookie('auth_token');
-      res.status(200).json({message:  "User logout successfully"});
+  router.post("/logout", isAuthenticated, (req, res) => {
+    // Effacez le cookie contenant le jeton JWT
+    res.clearCookie("auth_token", { httpOnly: true, secure: true });
+    
+    res.status(200).json({ message: "Logout successful" });
   });
+
 
   // create bank account for user
   router.post('/create-account', isAuthenticated, async (req, res) => {
@@ -177,8 +183,6 @@ const router = express.Router();
       res.status(404).json({message:"user doesn't have this account type"})
     }
 
-    
-
     if (!account.transactions) {
       account.transactions = [];
     }
@@ -206,5 +210,26 @@ const router = express.Router();
     res.status(200).json({message:"transaction added", transaction: userTransaction })
 
   })
+
+  
+  router.get("/totalBalance", isAuthenticated, async (req, res) => {
+    const { email } = req.query;
+
+    const users = readData();
+    const user = users.find((user) => user.email === email);
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.accounts || !Array.isArray(user.accounts)) {
+        return res.status(404).json({ message: "User doesn't have any accounts" });
+    }
+
+    const totalBalance = user.accounts.reduce((sum, account) => sum + account.balance, 0);
+
+    res.status(200).json({ totalBalance });
+  });
+
 
  export default router;
