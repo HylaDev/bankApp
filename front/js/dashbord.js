@@ -1,5 +1,5 @@
 const API_URL = 'http://localhost:3000';
-
+let currentTransactions = [];
 function logout() {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user_email');
@@ -80,7 +80,7 @@ function displayAccounts(accounts) {
                         <div class="card-body">
                             <h5 class="card-title">Compte ${account.accountType}</h5>
                             <p class="card-text">${account.balance.toFixed(2)}€</p>
-                            <button class="btn btn-success" onclick="viewTransactions('${account.accountNumber}')">Voir les transactions</button>
+                            <button class="btn btn-success" onclick="viewTransactions('${account.accountType}')">Voir les transactions</button>
                         </div>
                     </div>
                 </div>
@@ -124,14 +124,17 @@ function createAccount() {
     // window.location.replace('login.html');
 }
 
-function viewTransactions(accountNumber) {
+function viewTransactions(accountType) {
+    const email = localStorage.getItem('user_email'); // On suppose que l'email est stocké dans le localStorage
+
     $.ajax({
-        url: `${API_URL}/users/accounts/${accountNumber}/transactions`, 
+        url: `${API_URL}/users/list/transactions`,
         method: 'GET',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('auth_token')}` },
+        data: { email: email, accountType: accountType }, 
         success: function(response) {
-            const transactions = response.transactions;
-            displayTransactionHistory(transactions);
+            currentTransactions = response.transaction; 
+            displayTransactionHistory(currentTransactions);
             $('#transactionHistoryModal').modal('show'); 
         },
         error: function(error) {
@@ -141,7 +144,6 @@ function viewTransactions(accountNumber) {
     });
 }
 
-// Fonction pour afficher l'historique de transactions
 function displayTransactionHistory(transactions) {
     const transactionHistoryTable = $('#transactionHistoryTable');
     transactionHistoryTable.empty();
@@ -155,38 +157,28 @@ function displayTransactionHistory(transactions) {
                 <tr>
                     <td>${transaction.date}</td>
                     <td>${transaction.transactionType}</td>
-                    <td>${transaction.transactionType === 'Depot' ? '+' : '-'}€${transaction.amount}</td>
-                    <td>€${transaction.balanceAfterTransaction}</td>
+                    <td>${transaction.transactionType === 'Depot' ? '+' : '-'}${transaction.amount}€</td>
+                    <td>${transaction.balanceAfterTransaction || 'N/A'}€</td>
                 </tr>
             `);
         });
     }
 }
 
-// Fonction pour appliquer les filtres
 function applyFilters() {
     const filterType = $('#filterType').val();
-    const filterDate = $('#filterDate').val();
     const filterPeriod = $('#filterPeriod').val();
-
     const now = new Date();
-    let filteredTransactions = currentTransactions;
 
-    // Filtrer par type
+    let filteredTransactions = currentTransactions; 
+
     if (filterType) {
         filteredTransactions = filteredTransactions.filter(transaction => transaction.transactionType === filterType);
     }
 
-    // Filtrer par date spécifique
-    if (filterDate) {
-        filteredTransactions = filteredTransactions.filter(transaction => transaction.date === filterDate);
-    }
-
-    // Filtrer par période (7, 30 ou 90 derniers jours)
     if (filterPeriod) {
         const daysAgo = new Date();
         daysAgo.setDate(now.getDate() - parseInt(filterPeriod));
-
         filteredTransactions = filteredTransactions.filter(transaction => {
             const transactionDate = new Date(transaction.date);
             return transactionDate >= daysAgo && transactionDate <= now;
@@ -195,13 +187,13 @@ function applyFilters() {
 
     displayTransactionHistory(filteredTransactions);
 
-    // Affiche un message si aucune transaction n'est trouvée
     if (filteredTransactions.length === 0) {
         $('#noTransactionsMessage').show();
     } else {
         $('#noTransactionsMessage').hide();
     }
 }
+
 function downloadCSV() {
     const csvContent = generateCSV(currentTransactions);
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -215,12 +207,10 @@ function downloadCSV() {
     alert('Téléchargement réussi !');
 }
 
-// Générer le contenu CSV
 function generateCSV(transactions) {
     let csv = 'Date,Type,Montant,Solde après transaction\n';
     transactions.forEach(transaction => {
-        csv += `${transaction.date},${transaction.transactionType},${transaction.amount},${transaction.balanceAfterTransaction}\n`;
+        csv += `${transaction.date},${transaction.transactionType},${transaction.amount},${transaction.balanceAfterTransaction || 'N/A'}\n`;
     });
     return csv;
 }
-

@@ -224,7 +224,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
   // transactions historisque
 
   router.get("/list/transactions", isAuthenticated, async (req, res) =>{
-      const {email, accountType} = req.body;
+      const {email, accountType} = req.query;
       const users = readData();
       const user = users.find((user) => user.email === email);
 
