@@ -1,7 +1,7 @@
 [
   {
     "name": "baltazr",
-    "email": "alice.dupont@gmail.com",
+    "email": "test@test.com",
     "password": "$2b$10$ql6Z3lDQXPs/BXRTMUhxseDGvkw/3IaBnq3OTwSXuCjHvCLlMUnae",
     "accounts": [
       {
@@ -75,6 +75,12 @@
         "accountNumber": "ACC-1731496261440",
         "accountType": "épargne",
         "balance": 20
+      },
+      {
+        "accountNumber": "ACC-1731514408629",
+        "accountType": "épargne",
+        "balance": 20,
+        "threshold": 50
       }
     ]
   },
@@ -82,5 +88,30 @@
     "name": "baltazr",
     "email": "jen@to",
     "password": "$2b$10$N2p06bbqaSbsV7EurF4lwuHqMCqQhMKvB27QGay4GPBnq6LbxQ.Lu"
+  },
+  {
+    "name": "test",
+    "email": "test",
+    "password": "$2b$10$iBylod.iADZhhmYdruxZZ.865OJYW12lDCVdDCMNatGVKQwWxys9y",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731522498881",
+        "accountType": "Epargne",
+        "balance": 180,
+        "threshold": 190,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": 10,
+            "date": "date"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 10,
+            "date": "date"
+          }
+        ]
+      }
+    ]
   }
 ]

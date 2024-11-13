@@ -207,13 +207,45 @@ router.get("/profile", isAuthenticated, async (req, res) => {
     account.transactions.push(userTransaction);
 
     saveData(users);
+    if(account.balance < account.threshold){
+      res.status(200).json({message:"transaction added", transaction: userTransaction, notification: "Alerte : Le solde est en dessous du seuil défini!" })
+
+    }
     res.status(200).json({message:"transaction added", transaction: userTransaction })
 
   })
 
+  // transactions historisque
+
+  router.get("/transactions/historique", isAuthenticated, async (req, res) =>{
+
+  })
+
+  // define threshold 
+  router.post('/define/threshold', (req, res) => {
+    const { email, accountType, threshold } = req.body;
+  
+    const users = readData();
+    const user = users.find(user => user.email === email);
+    console.log(user)
+  
+    const account = user.accounts.find((acc) => acc.accountType == accountType)
+    if(!account){
+      res.status(404).json({message:"user doesn't have this account type"})
+    }
+  
+    account.threshold = threshold;
+    saveData(users);
+  
+    res.status(200).json({
+      message: 'threshold updated successfuly',
+      threshold: threshold
+    });
+  });
+
   
   router.get("/totalBalance", isAuthenticated, async (req, res) => {
-    const { email } = req.query;
+    const { email } = req.body;
 
     const users = readData();
     const user = users.find((user) => user.email === email);
