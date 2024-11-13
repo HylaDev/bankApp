@@ -19,7 +19,47 @@
   {
     "name": "dos",
     "email": "t@d",
-    "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2"
+    "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2",
+    "transactions": [
+      {},
+      {
+        "transactionType": "retrait",
+        "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "retrait",
+        "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "retrait",
+        "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "retrait",
+        "amount": "20",
+        "date": "date"
+      },
+      {
+        "transactionType": "retrait",
+        "amount": "20",
+        "date": "date"
+      },
+      {
+        "transactionType": "retrait",
+        "amount": "20",
+        "date": "date"
+      }
+    ],
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731496261440",
+        "accountType": "épargne",
+        "balance": 20
+      }
+    ]
   },
   {
     "name": "jennifer comlanvi",
