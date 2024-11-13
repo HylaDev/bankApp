@@ -92,7 +92,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
       };
       const userToken = await generateJwt(payload);
       res.cookie("auth_token", userToken, { httpOnly: true});
-      return res.status(200).json({message:"user login", userToken:userToken, user:user.email})
+      return res.status(200).json({message:"user login", userToken:userToken, userEmail:user.email, userName:user.name})
     }
     return res.status(409).json({message:"connexion echouée"})
 
@@ -215,7 +215,8 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
   
   router.get("/totalBalance", isAuthenticated, async (req, res) => {
-    const { email } = req.query;
+    // const { email } = req.query;
+    const email = req.user.email;
 
     const users = readData();
     const user = users.find((user) => user.email === email);

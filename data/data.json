@@ -33,7 +33,6 @@
     "email": "t@d",
     "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2",
     "transactions": [
-      {},
       {
         "transactionType": "retrait",
         "amount": 20,
@@ -176,6 +175,30 @@
   {
     "name": "yaya",
     "email": "yaya@gmail.com",
-    "password": "$2b$10$sgTqamxE7SqD9lJAqfYDLOLxYELstRn49srC61ug33ZZeS5JvRiam"
+    "password": "$2b$10$sgTqamxE7SqD9lJAqfYDLOLxYELstRn49srC61ug33ZZeS5JvRiam",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731843883171",
+        "accountType": "Epargne",
+        "balance": 450,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": "20",
+            "date": "date"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 200,
+            "date": "date"
+          }
+        ]
+      },
+      {
+        "accountNumber": "ACC-1731444255402",
+        "accountType": "Courant",
+        "balance": 20
+      }
+    ]
   }
 ]
