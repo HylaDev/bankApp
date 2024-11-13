@@ -43,10 +43,10 @@ $(document).ready(function() {
             success: function(response) {
                 $('#signupForm').trigger('reset');
                 $('#success-message').text('Votre inscription a bien été prise en compte! Vous allez être redirigé vers le tableau de bord.').show();
-                // console.log(response);
-                // localStorage.setItem('auth_token', response.userToken);
-                // localStorage.setItem('user_email', response.userEmail);
-                // localStorage.setItem('user_name', response.userName);
+                console.log(response);
+                localStorage.setItem('auth_token', response.userToken);
+                localStorage.setItem('user_email', response.userEmail);
+                localStorage.setItem('user_name', response.userName);
                 
                 // Redirect to dashboard after 5 seconds
                 setTimeout(() => {
