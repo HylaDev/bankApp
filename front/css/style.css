@@ -7,7 +7,7 @@ body, html {
   
   .hero-section {
     position: relative;
-    background: url('./assets/img1.jpg') no-repeat center center;
+    background: url('../assets/img1.jpg') no-repeat center center;
     background-size: cover;
     height: 60vh;
     display: flex;
