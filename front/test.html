@@ -41,7 +41,6 @@
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
                 displayOutput(data);
-                window.location.href = '/dashboard.html';
             } else {
                 console.error('Error fetching users:', xhr.status, xhr.statusText);
                 document.getElementById('output').textContent = 'Error loading users';

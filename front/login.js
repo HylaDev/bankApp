@@ -29,7 +29,9 @@ function loginUser(event){
                 localStorage.setItem('auth_token', response.userToken);
                 localStorage.setItem('user_email', response.userEmail);
                 localStorage.setItem('user_name', response.userName);
-                window.location.href = 'dashbord.html';  // Redirection vers dashboard
+                setTimeout(() => {
+                    window.location.href = 'dashbord.html';
+                }, 2000);
 
             }else{
                 displayLoginMessage(response.message);

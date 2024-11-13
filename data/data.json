@@ -6,12 +6,24 @@
     "accounts": [
       {
         "accountNumber": "ACC-1731443883171",
-        "accountType": "épargne",
-        "balance": 0
+        "accountType": "Epargne",
+        "balance": 0,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": "20",
+            "date": "date"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 20,
+            "date": "date"
+          }
+        ]
       },
       {
         "accountNumber": "ACC-1731444255402",
-        "accountType": "épargne",
+        "accountType": "Courant",
         "balance": 20
       }
     ]
@@ -20,11 +32,132 @@
     "name": "dos",
     "email": "t@d",
     "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2",
+    "transactions": [
+      {},
+      {
+        "transactionType": "Retrait",
+        "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "Retrait",
+        "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "Retrait",
+        "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "Retrait",
+        "amount": "20",
+        "date": "date"
+      },
+      {
+        "transactionType": "Retrait",
+        "amount": "20",
+        "date": "date"
+      },
+      {
+        "transactionType": "Retrait",
+        "amount": "20",
+        "date": "date"
+      },
+      {
+        "transactionType": "Retrait",
+        "amount": "20",
+        "date": "date"
+      }
+    ],
     "accounts": [
       {
         "accountNumber": "ACC-1731496261440",
-        "accountType": "épargne",
-        "balance": 20
+        "accountType": "Epargne",
+        "balance": 2,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": 10,
+            "date": "2025-06-25"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 10,
+            "date": "2025-06-25"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 18,
+            "date": "2025-06-10"
+          }
+        ]
+      },
+      {
+        "accountNumber": "ACC-1731534197057",
+        "accountType": "Courant",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731534212299",
+        "accountType": "Epargne",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731534244376",
+        "accountType": "Epargne",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731534450072",
+        "accountType": "Courant",
+        "balance": 10000,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731534711313",
+        "accountType": "Courant",
+        "balance": 1000,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731534770092",
+        "accountType": "Courant",
+        "balance": 100,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731535056720",
+        "accountType": "Courant",
+        "balance": 20,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731535656995",
+        "accountType": "Epargne",
+        "balance": 4,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731535721583",
+        "accountType": "Epargne",
+        "balance": 4,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731535733443",
+        "accountType": "Courant",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731535814292",
+        "accountType": "Epargne",
+        "balance": 10,
+        "threshold": 50
       }
     ]
   },
@@ -126,6 +259,51 @@
   {
     "name": "yaya",
     "email": "yaya@gmail.com",
-    "password": "$2b$10$sgTqamxE7SqD9lJAqfYDLOLxYELstRn49srC61ug33ZZeS5JvRiam"
+    "password": "$2b$10$sgTqamxE7SqD9lJAqfYDLOLxYELstRn49srC61ug33ZZeS5JvRiam",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731536047392",
+        "accountType": "Courant",
+        "balance": 65,
+        "threshold": 50,
+        "transactions": [
+          {
+            "transactionType": "Depot",
+            "amount": 11,
+            "date": "2025-05-12"
+          }
+        ]
+      },
+      {
+        "accountNumber": "ACC-1731536164108",
+        "accountType": "Courant",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731536283348",
+        "accountType": "Courant",
+        "balance": 50,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731536345673",
+        "accountType": "Courant",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731536386065",
+        "accountType": "Courant",
+        "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731536393631",
+        "accountType": "Courant",
+        "balance": 10,
+        "threshold": 50
+      }
+    ]
   }
 ]

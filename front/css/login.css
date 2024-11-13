@@ -62,7 +62,7 @@
     transition: background-color 0.3s ease;
     margin-top: 1rem;
   }
-  /* Styles pour le lien "Inscrivez-vous" */
+  
 .signup-link {
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -85,7 +85,7 @@
   }
   
 
-  /* Style pour le logo BankApp */
+  
 .logo {
   font-size: 28px; 
   font-weight: bold;
