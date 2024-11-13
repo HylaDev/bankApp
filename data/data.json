@@ -98,7 +98,7 @@
         "accountNumber": "ACC-1731522498881",
         "accountType": "Epargne",
         "balance": 180,
-        "threshold": 190,
+        "threshold": 160,
         "transactions": [
           {
             "transactionType": "Retrait",
@@ -111,6 +111,12 @@
             "date": "date"
           }
         ]
+      },
+      {
+        "accountNumber": "YEJ-1731524322293",
+        "accountType": "Courant",
+        "balance": 200,
+        "threshold": 50
       }
     ]
   }

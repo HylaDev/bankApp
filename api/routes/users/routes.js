@@ -126,9 +126,13 @@ router.get("/profile", isAuthenticated, async (req, res) => {
     }
     if (!user.accounts) {
       user.accounts = [];
-  }
+    }
+    const account = user.accounts.find((acc) => acc.accountType == accountType);
+    if(account){
+      return res.status(404).json({ message: 'This account type already exist.' });
+    }
     const newAccount = {
-        accountNumber: `ACC-${Date.now()}`,
+        accountNumber: `YEJ-${Date.now()}`,
         accountType,
         balance: parsedInitialB,
         threshold: 50,
@@ -217,7 +221,27 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
   // transactions historisque
 
-  router.get("/transactions/historique", isAuthenticated, async (req, res) =>{
+  router.get("/list/transactions", isAuthenticated, async (req, res) =>{
+      const {email, accountType} = req.body;
+      const users = readData();
+      const user = users.find((user) => user.email === email);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const account = user.accounts.find((acc) => acc.accountType == accountType)
+      if(!account){
+        res.status(404).json({message:"user doesn't have this account type"})
+      }
+  
+      if (!account.transactions) {
+        account.transactions = []; 
+      }
+
+      if (!account.transactions || !Array.isArray(account.transactions)) {
+          return res.status(404).json({ message: "User doesn't have any transactions" });
+      }
+      res.status(200).json({transaction: account.transactions})
 
   })
 
@@ -227,7 +251,6 @@ router.get("/profile", isAuthenticated, async (req, res) => {
   
     const users = readData();
     const user = users.find(user => user.email === email);
-    console.log(user)
   
     const account = user.accounts.find((acc) => acc.accountType == accountType)
     if(!account){
@@ -245,7 +268,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
   
   router.get("/totalBalance", isAuthenticated, async (req, res) => {
-    const { email } = req.body;
+    const email = req.user.email;
 
     const users = readData();
     const user = users.find((user) => user.email === email);
