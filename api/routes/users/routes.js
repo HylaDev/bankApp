@@ -4,7 +4,9 @@ import express from 'express';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import bcrypt from 'bcrypt';
+import generateJwt from '../../services/jwt/index.js';
+import isAuthenticated from '../../../middlewares/isAuth/index.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +21,7 @@ const saveData = (data) => {
 const router = express.Router();
 
   // list users
-  router.get("/", (req, res) => {
+  router.get("/", isAuthenticated, async (req, res) => {
     const users = readData();
     res.status(200).json(users);
     });
@@ -44,7 +46,15 @@ const router = express.Router();
     users.push(newUser);
     saveData(users);
 
-    res.status(201).json({ message: 'User registered successfully.', user: newUser });
+    const payload = {
+      name: newUser.name,
+      email: newUser.email,
+      pass: newUser.password,
+    };
+    const userToken = await generateJwt(payload);
+    res.cookie("auth_token", userToken, { httpOnly: true});
+
+    res.status(201).json({ message: 'User registered and login successfully.', user: newUser });
 });
 
   // login user
@@ -61,9 +71,16 @@ const router = express.Router();
       return res.status(404).json({message: "user not exist"});
     }
     const user = users.find((user) => user.email === email );
+    
     const checkPassword = await checkPass(email, password);
-    console.log(checkPassword)
     if(checkPassword){
+      const payload = {
+        name: user.name,
+        email: user.email,
+        pass: user.password,
+      };
+      const userToken = await generateJwt(payload);
+      res.cookie("auth_token", userToken, { httpOnly: true});
       return res.status(200).json({message:"user login"})
     }
     return res.status(409).json({message:"user doesn't login"})
@@ -71,7 +88,7 @@ const router = express.Router();
   });
 
   // create bank account for user
-  router.post('/create-account', (req, res) => {
+  router.post('/create-account', isAuthenticated, async (req, res) => {
     const { email, accountType, initialBalance } = req.body;
 
     if (!email || !accountType || initialBalance === undefined) {
@@ -100,8 +117,8 @@ const router = express.Router();
   });
 
   // list user accounts
-  router.get('/:email/accounts', (req, res) => {
-    const { email } = req.params;
+  router.get('/accounts', isAuthenticated, async (req, res) => {
+    const { email } = req.body;
 
     const users = readData();
     const user = users.find((user) => user.email === email);

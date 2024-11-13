@@ -20,5 +20,10 @@
     "name": "dos",
     "email": "t@d",
     "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2"
+  },
+  {
+    "name": "baltazr",
+    "email": "jen@to",
+    "password": "$2b$10$N2p06bbqaSbsV7EurF4lwuHqMCqQhMKvB27QGay4GPBnq6LbxQ.Lu"
   }
 ]
