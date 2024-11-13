@@ -48,10 +48,9 @@ $(document).ready(function() {
                 localStorage.setItem('user_email', response.userEmail);
                 localStorage.setItem('user_name', response.userName);
                 
-                // Redirect to dashboard after 5 seconds
                 setTimeout(() => {
                     window.location.replace('dashbord.html');
-                }, 5000);
+                }, 3000);
             },
             error: function(error) {
                 console.error(error);
