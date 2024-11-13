@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import generateJwt from '../../services/jwt/index.js';
 import isAuthenticated from '../../../middlewares/isAuth/index.js';
+import {checkAccountBalance} from '../../services/checkAccounts/index.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -105,6 +106,11 @@ const router = express.Router();
     if (!email || !accountType || initialBalance === undefined) {
         return res.status(400).json({ message: 'email, account type, and initial balance are required.' });
     }
+    
+    const parsedInitialB = parseFloat(initialBalance);
+    if (isNaN(parsedInitialB) || parsedInitialB <= 0) {
+        return res.status(400).json({ message: "Invalid amount. Amount must be a positive number." });
+    }
 
     const users = readData();
     const user = users.find((user) => user.email === email);
@@ -118,7 +124,7 @@ const router = express.Router();
     const newAccount = {
         accountNumber: `ACC-${Date.now()}`,
         accountType,
-        balance: initialBalance,
+        balance: parsedInitialB,
         threshold: 50,
     };
 
@@ -144,11 +150,16 @@ const router = express.Router();
 
   // add transaction to user
   router.post("/add/transaction", isAuthenticated, async (req, res) =>{
-    const {email, transactionType, amount, date} = req.body;
+    const {email, accountType, transactionType, amount, date} = req.body;
 
 
     if (!email || !transactionType || !amount || !date){
       res.status(400).json({message: "email, transactionType, amount and date are required"});
+    }
+
+    const parsedAmount = parseFloat(amount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+        return res.status(400).json({ message: "Invalid amount. Amount must be a positive number." });
     }
 
     const users = readData();
@@ -156,17 +167,40 @@ const router = express.Router();
     if(!user){
       return res.status(404).json({message:"user not found"});
     }
-
-    if (!user.transactions) {
-      user.transactions = [];
+    if (!user.accounts){
+      res.status(404).json({message:"user doesn't have account"})
     }
+
+    const account = user.accounts.find((acc) => acc.accountType == accountType);
+    console.log(account)
+    if(!account){
+      res.status(404).json({message:"user doesn't have this account type"})
+    }
+
+    
+
+    if (!account.transactions) {
+      account.transactions = [];
+    }
+
+    if (transactionType === "Retrait") {
+        if (account.balance < parsedAmount) {
+            return res.status(400).json({ message: "Insufficient balance" });
+        }
+        account.balance -= parsedAmount;
+    } else if (transactionType === "Depot") {
+        account.balance += parsedAmount;
+    } else {
+        return res.status(400).json({ message: "Invalid transaction type" });
+    }
+    
     
     const userTransaction = {
       transactionType, 
-      amount,
+      amount: parsedAmount,
       date
     }
-    user.transactions.push(userTransaction)
+    account.transactions.push(userTransaction);
 
     saveData(users);
     res.status(200).json({message:"transaction added", transaction: userTransaction })

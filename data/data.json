@@ -6,12 +6,24 @@
     "accounts": [
       {
         "accountNumber": "ACC-1731443883171",
-        "accountType": "épargne",
-        "balance": 0
+        "accountType": "Epargne",
+        "balance": 0,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": "20",
+            "date": "date"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 20,
+            "date": "date"
+          }
+        ]
       },
       {
         "accountNumber": "ACC-1731444255402",
-        "accountType": "épargne",
+        "accountType": "Courant",
         "balance": 20
       }
     ]
@@ -35,6 +47,11 @@
       {
         "transactionType": "retrait",
         "amount": 20,
+        "date": "date"
+      },
+      {
+        "transactionType": "retrait",
+        "amount": "20",
         "date": "date"
       },
       {
