@@ -54,7 +54,7 @@ const router = express.Router();
     const userToken = await generateJwt(payload);
     res.cookie("auth_token", userToken, { httpOnly: true});
 
-    res.status(201).json({ message: 'User registered and login successfully.', user: newUser });
+    res.status(201).json({ message: 'User registered and login successfully.', userEmail: newUser.email,userName: newUser.name, userToken: userToken});
 });
 
   // login user
@@ -83,7 +83,7 @@ const router = express.Router();
       };
       const userToken = await generateJwt(payload);
       res.cookie("auth_token", userToken, { httpOnly: true});
-      return res.status(200).json({message:"Vous etes bien connecté"})
+      return res.status(200).json({message:"user login", userToken:userToken, userEmail:user.email, userName: user.name})
     }
     return res.status(409).json({message:"connexion echouée"})
 
@@ -120,7 +120,8 @@ const router = express.Router();
     const newAccount = {
         accountNumber: `ACC-${Date.now()}`,
         accountType,
-        balance: initialBalance
+        balance: initialBalance,
+        threshold: 50,
     };
 
     user.accounts.push(newAccount);

@@ -41,10 +41,16 @@ $(document).ready(function() {
                 pass: pass
               }),
             success: function(response) {
-                console.log(response);
                 $('#signupForm').trigger('reset');
                 $('#success-message').text('Votre inscription a bien été prise en compte! Vous allez être redirigé vers le tableau de bord.').show();
-                window.location.replace('dashbord.html');
+                console.log(response);
+                localStorage.setItem('auth_token', response.userToken);
+                localStorage.setItem('user_email', response.userEmail);
+                localStorage.setItem('user_name', response.userName);
+                
+                setTimeout(() => {
+                    window.location.replace('dashbord.html');
+                }, 3000);
             },
             error: function(error) {
                 console.error(error);

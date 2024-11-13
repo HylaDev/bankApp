@@ -20,39 +20,6 @@
     "name": "dos",
     "email": "t@d",
     "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2",
-    "transactions": [
-      {},
-      {
-        "transactionType": "retrait",
-        "amount": 20,
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": 20,
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": 20,
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      }
-    ],
     "accounts": [
       {
         "accountNumber": "ACC-1731496261440",
@@ -110,5 +77,55 @@
     "name": "jennifer COMLANVI",
     "email": "comlanviid5a@yahoo.fr",
     "password": "$2b$10$rAd0ldobVvWmJ6wwveA0TOuAuhVYC5OZQ0eUTT6VYpfHY.4p9jqW6"
+  },
+  {
+    "name": "dododo",
+    "email": "do@gmail.com",
+    "password": "$2b$10$xKRIzG.jiYXEGlgZFFSci.yxVkUfmCqvlawqIlzN7S2IIecsFTxVy"
+  },
+  {
+    "name": "bfgcbfc",
+    "email": "fddxvx@gmail.com",
+    "password": "$2b$10$Mx53wi.QH5Li5spYmxmcNelV7x74zvYVDqUwO/07AdFxd0imKVWB2"
+  },
+  {
+    "name": "jennifer COMLANVI",
+    "email": "comlanviidbgfa@yahoo.fr",
+    "password": "$2b$10$l0nylLh2X1hDCtp6y2J6kuh5Luwq3a9EZLci/ygmo9vMaSjw0NY/K"
+  },
+  {
+    "name": "dhdfcxgdfv",
+    "email": "fthfg@ghg.com",
+    "password": "$2b$10$s7ipT6DQMoiYwBBgzJTMpuTN3fBMj35UfzYj5QxbC8/5pnm/Xfaeu"
+  },
+  {
+    "name": "dxvdwxc",
+    "email": "ddd@yahoo.fr",
+    "password": "$2b$10$67/rjHtqhrOHsMj5yP2V.efHvcIZ1T46BxwjdXmoq1vKdqSln2mBy"
+  },
+  {
+    "name": "xfvjn",
+    "email": "dfbjkl@gmzsdk.com",
+    "password": "$2b$10$AhHVDeU8nSrfbDJpLpPk1.NBTv09sQ69kMgs7kCl0tOyG23p3ykaK"
+  },
+  {
+    "name": "fdjbfj,",
+    "email": "fdjngdf@gmail.com",
+    "password": "$2b$10$U8Ky9acUhPXYcx8JPR7WQutA1Wa1EsJ0Z/W5sP0/f/hSEjdZ5nU5C"
+  },
+  {
+    "name": "jennifer COMLANVI",
+    "email": "comlanvdgdiida@yahoo.fr",
+    "password": "$2b$10$AzyIJnmTjh.vWX/iF7kqnea3GN/L90kAIoA59QXqvhgSo3Fd.rFLm"
+  },
+  {
+    "name": "yasminedah",
+    "email": "yasminedah@gmail.com",
+    "password": "$2b$10$2gee7.WWbZwRGmHMOsvWfOzzgyuepPRqhFqXrrx9evWM0SYm318Ji"
+  },
+  {
+    "name": "yaya",
+    "email": "yaya@gmail.com",
+    "password": "$2b$10$sgTqamxE7SqD9lJAqfYDLOLxYELstRn49srC61ug33ZZeS5JvRiam"
   }
 ]

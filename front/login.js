@@ -25,6 +25,10 @@ function loginUser(event){
             const response = JSON.parse(xhr.responseText);
             if(xhr.status === 200){
                 displayLoginMessage(response.message,true);
+                console.log(response);
+                localStorage.setItem('auth_token', response.userToken);
+                localStorage.setItem('user_email', response.userEmail);
+                localStorage.setItem('user_name', response.userName);
                 window.location.href = 'dashbord.html';  // Redirection vers dashboard
 
             }else{
