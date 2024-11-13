@@ -10,11 +10,11 @@ function loginUser(event){
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    if (password.length < 8) {
+    // if (password.length < 8) {
         
-        displayLoginMessage("Le mot de passe doit contenir au moins 8 caractères.");
-        return;
-    }
+    //     displayLoginMessage("Le mot de passe doit contenir au moins 8 caractères.");
+    //     return;
+    // }
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${API_URL}/users/login`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -25,6 +25,8 @@ function loginUser(event){
             const response = JSON.parse(xhr.responseText);
             if(xhr.status === 200){
                 displayLoginMessage(response.message,true);
+                window.location.href = 'dashbord.html';  // Redirection vers dashboard
+
             }else{
                 displayLoginMessage(response.message);
             }
