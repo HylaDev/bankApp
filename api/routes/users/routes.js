@@ -49,9 +49,11 @@ const router = express.Router();
 
   // login user
   router.post("/login", async (req, res) =>{
+    console.log(" j'ai recu la requete")
     const {email, password} = req.body;
 
     if(!email || !password){
+    console.log("email ou mdp missing")
       return res.status(400).json({message: 'email and password are required to login'})
     }
 
