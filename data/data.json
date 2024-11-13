@@ -15,5 +15,10 @@
         "balance": 20
       }
     ]
+  },
+  {
+    "name": "dos",
+    "email": "t@d",
+    "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2"
   }
 ]

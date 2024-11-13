@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import readData from "../readData/index.js";
 
 
 function hashPassword(password) {
@@ -19,5 +20,17 @@ function hashPassword(password) {
   });
 }
 
+async function checkPass(email, password) {
 
-export default hashPassword ;
+  const users = readData();
+  const user = users.find((user) => user.email === email)
+  const match = await bcrypt.compare(password, user.password);
+  if(match){
+    return true;
+  }
+  return false;
+  
+}
+
+
+export {hashPassword, checkPass} ;
