@@ -1,7 +1,7 @@
 [
   {
     "name": "baltazr",
-    "email": "alice.dupont@gmail.com",
+    "email": "test@test.com",
     "password": "$2b$10$ql6Z3lDQXPs/BXRTMUhxseDGvkw/3IaBnq3OTwSXuCjHvCLlMUnae",
     "accounts": [
       {
@@ -74,6 +74,12 @@
         "accountNumber": "ACC-1731496261440",
         "accountType": "épargne",
         "balance": 20
+      },
+      {
+        "accountNumber": "ACC-1731514408629",
+        "accountType": "épargne",
+        "balance": 20,
+        "threshold": 50
       }
     ]
   },
