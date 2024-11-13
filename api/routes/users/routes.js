@@ -52,7 +52,7 @@ const router = express.Router();
       pass: newUser.password,
     };
     const userToken = await generateJwt(payload);
-    res.cookie("auth_token", userToken, { httpOnly: true});
+    res.cookie("auth_token", userToken, { httpOnly: false});
 
     res.status(201).json({ message: 'User registered and login successfully.', user: newUser });
 });
