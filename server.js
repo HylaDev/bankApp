@@ -1,13 +1,19 @@
-import express from 'express';
+import express from "express";
+import usersRoutes from "./api/routes/users/routes.js";
+import cors from 'cors';
 const app = express();
 
 app.use(express.json());
-
+app.use(cors())
 
 app.get("/", (req, res) => {
-res.send({ message: "Welcome to monitoring web app" });
+res.send({ message: "Welcome to your bank account management app" });
 });
 
 
+app.use("/users", usersRoutes);
+
+
+
 const port = 3000;
-const server = app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, () => console.log(`listening on port ${port}`));

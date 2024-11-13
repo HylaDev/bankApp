@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank App - List Users</title>
+</head>
+<body>
+    <h1>List of Users</h1>
+    <button onclick="getAllUsers()">Load Users</button>
+    <div id="output"></div>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+
+        // Function to display output in the #output div
+        function displayOutput(data) {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous data
+
+            if (Array.isArray(data) && data.length > 0) {
+                data.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    userDiv.textContent = `name: ${user.name}, Email: ${user.email}`;
+                    outputDiv.appendChild(userDiv);
+                });
+            } else {
+                outputDiv.textContent = 'No users found.';
+            }
+        }
+
+        // Function to fetch and display all users using XMLHttpRequest
+        function getAllUsers() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${API_URL}/users`, true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log("Request complete with status:", xhr.status); // Log the status code
+            console.log("Response Text:", xhr.responseText); // Log the response
+
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                displayOutput(data);
+            } else {
+                console.error('Error fetching users:', xhr.status, xhr.statusText);
+                document.getElementById('output').textContent = 'Error loading users';
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+    </script>
+</body>
+</html>
