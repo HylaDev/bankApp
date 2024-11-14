@@ -74,7 +74,7 @@
       {
         "accountNumber": "ACC-1731496261440",
         "accountType": "Epargne",
-        "balance": 2,
+        "balance": 12,
         "transactions": [
           {
             "transactionType": "Retrait",
@@ -90,6 +90,11 @@
             "transactionType": "Retrait",
             "amount": 18,
             "date": "2025-06-10"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 10,
+            "date": "2024-12-25"
           }
         ]
       },
@@ -157,6 +162,12 @@
         "accountNumber": "ACC-1731535814292",
         "accountType": "Epargne",
         "balance": 10,
+        "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731572536563",
+        "accountType": "Epargne",
+        "balance": 100,
         "threshold": 50
       }
     ]
