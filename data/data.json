@@ -186,7 +186,7 @@
       {
         "accountNumber": "ACC-1731843883171",
         "accountType": "Epargne",
-        "balance": 450,
+        "balance": 350,
         "transactions": [
           {
             "transactionType": "Retrait",
@@ -197,13 +197,25 @@
             "transactionType": "Depot",
             "amount": 200,
             "date": "date"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 100,
+            "date": "2024-11-14"
           }
         ]
       },
       {
         "accountNumber": "ACC-1731444255402",
         "accountType": "Courant",
-        "balance": 20
+        "balance": 270,
+        "transactions": [
+          {
+            "transactionType": "Depot",
+            "amount": 250,
+            "date": "2024-11-14"
+          }
+        ]
       }
     ]
   },
@@ -254,5 +266,10 @@
     "name": "Thomas",
     "email": "pop@smoke.com",
     "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq"
+  },
+  {
+    "name": "jenifer",
+    "email": "jenifer@gmail.com",
+    "password": "$2b$10$/22LfY7Vo7Ot3No.4G.IsOrFA03rXpv0glXT/PGdf5P6FAeaEE7wO"
   }
 ]
