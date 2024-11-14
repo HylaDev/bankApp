@@ -187,6 +187,7 @@
         "accountNumber": "ACC-1731843883171",
         "accountType": "Epargne",
         "balance": 450,
+        "threshold": 100,
         "transactions": [
           {
             "transactionType": "Retrait",
@@ -203,7 +204,8 @@
       {
         "accountNumber": "ACC-1731444255402",
         "accountType": "Courant",
-        "balance": 20
+        "balance": 20,
+        "threshold": 80
       }
     ]
   },

@@ -75,12 +75,14 @@ function displayAccounts(accounts) {
     } else {
         accounts.forEach(account => {
             accountsHtml += `
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Compte ${account.accountType}</h5>
                             <p class="card-text">${account.balance.toFixed(2)}€</p>
                             <button class="btn btn-success" onclick="viewTransactions('${account.accountType}')">Voir les transactions</button>
+                            <button class="btn btn-warning ml-2" onclick="defineThreshold('${account.accountType}', ${account.threshold || 0})">Définir le seuil</button>
+                            <button class="btn btn-danger ml-2" onclick="deleteAccount('${account.accountType}')">Supprimer le compte</button>
                         </div>
                     </div>
                 </div>
@@ -124,7 +126,7 @@ function createAccount() {
 }
 
 function viewTransactions(accountType) {
-    const email = localStorage.getItem('user_email'); // On suppose que l'email est stocké dans le localStorage
+    const email = localStorage.getItem('user_email');
 
     $.ajax({
         url: `${API_URL}/users/list/transactions`,
@@ -142,6 +144,68 @@ function viewTransactions(accountType) {
         }
     });
 }
+
+function deleteAccount(accountType) {
+    const email = localStorage.getItem('user_email');
+
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce compte ? Cette action est irréversible.")) {
+        $.ajax({
+            url: `${API_URL}/users/deleteAccount`,
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('auth_token')}` },
+            data: { email: email, accountType: accountType },
+            success: function(response) {
+                alert("Compte supprimé avec succès.");
+                loadUserProfile(localStorage.getItem('auth_token')); 
+            },
+            error: function(error) {
+                console.error("Erreur lors de la suppression du compte :", error);
+                alert("Erreur lors de la suppression du compte.");
+            }
+        });
+    }
+}
+
+let selectedAccountType = '';
+
+function defineThreshold(accountType, threshold) {
+    selectedAccountType = accountType;
+    $('#thresholdAccountType').text(accountType); 
+    $('#thresholdInput').val(threshold); 
+    
+    $('#thresholdModal').modal('show');
+}
+function saveThreshold() {
+    const email = localStorage.getItem('user_email');
+    const threshold = parseFloat($('#thresholdInput').val()); 
+
+    if (isNaN(threshold) || threshold <= 0) {
+        alert("Veuillez entrer un seuil valide.");
+        return;
+    }
+
+    $.ajax({
+        url: `${API_URL}/users/define/threshold`,
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('auth_token')}` },
+        data: JSON.stringify({ email: email, accountType: selectedAccountType, threshold: threshold }),
+        contentType: 'application/json',
+        success: function(response) {
+            alert(response.message);
+            $('#thresholdModal').modal('hide'); 
+        },
+        error: function(error) {
+            console.error("Erreur lors de la définition du seuil :", error);
+            if (error.responseJSON && error.responseJSON.message) {
+                alert("Erreur : " + error.responseJSON.message);
+            } else {
+                alert("Erreur lors de la définition du seuil. Veuillez réessayer.");
+            }
+        }
+    });
+}
+
+
 
 function displayTransactionHistory(transactions) {
     const transactionHistoryTable = $('#transactionHistoryTable');
