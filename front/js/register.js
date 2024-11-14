@@ -49,8 +49,8 @@ $(document).ready(function() {
                 localStorage.setItem('user_name', response.userName);
                 
                 setTimeout(() => {
-                    window.location.replace('dashbord.html');
-                }, 3000);
+                    window.location.href = 'dashbord.html';
+                }, 2000);
             },
             error: function(error) {
                 console.error(error);

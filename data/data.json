@@ -206,5 +206,53 @@
         "balance": 20
       }
     ]
+  },
+  {
+    "name": "Thomas",
+    "email": "tom@gmail.com",
+    "password": "$2b$10$IFaHm6FJm/S5wJdZJCm1dezwyqnRiupppCfTPLzFpYZ887q6mAoke",
+    "accounts": [
+      {
+        "accountNumber": "YEJ-1731574824732",
+        "accountType": "Courant",
+        "balance": 20,
+        "threshold": 50,
+        "transactions": [
+          {
+            "transactionType": "Depot",
+            "amount": 10,
+            "date": "2024-11-14"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 40,
+            "date": "2024-11-14"
+          }
+        ]
+      },
+      {
+        "accountNumber": "YEJ-1731575039875",
+        "accountType": "Epargne",
+        "balance": 16,
+        "threshold": 50,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": 50,
+            "date": "2024-11-14"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Thomas",
+    "email": "thomas@gmail.com",
+    "password": "$2b$10$NRQeN0P6eh1yM49Ii8FyD.VT6yQdOmz.gJEgY.PRj2P6HHXY74O9y"
+  },
+  {
+    "name": "Thomas",
+    "email": "pop@smoke.com",
+    "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq"
   }
 ]

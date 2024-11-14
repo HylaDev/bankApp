@@ -68,11 +68,9 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
   // login user
   router.post("/login", async (req, res) =>{
-    console.log(" j'ai recu la requete")
     const {email, password} = req.body;
 
     if(!email || !password){
-    console.log("email ou mdp missing")
       return res.status(400).json({message: 'email and password are required to login'})
     }
 
@@ -82,8 +80,8 @@ router.get("/profile", isAuthenticated, async (req, res) => {
       return res.status(404).json({message: "user not exist"});
     }
     const user = users.find((user) => user.email === email );
-    
     const checkPassword = await checkPass(email, password);
+    console.log(checkPassword)
     if(checkPassword){
       const payload = {
         name: user.name,
@@ -108,7 +106,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
 
   // create bank account for user
-  router.post('/create-account', isAuthenticated, async (req, res) => {
+  router.post('/create-account', (req, res) => {
     const { email, accountType, initialBalance } = req.body;
 
     if (!email || !accountType || initialBalance === undefined) {
@@ -147,8 +145,8 @@ router.get("/profile", isAuthenticated, async (req, res) => {
   });
 
   // list user accounts
-  router.get('/accounts', isAuthenticated, async (req, res) => {
-    const { email } = req.body;
+  router.get('/:email/accounts', (req, res) => {
+    const { email } = req.params;
 
     const users = readData();
     const user = users.find((user) => user.email === email);

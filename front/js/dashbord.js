@@ -120,8 +120,7 @@ function displayTransactions(accounts) {
 }
 
 function createAccount() {
-    alert("Redirection vers la page de création de compte");
-    // window.location.replace('login.html');
+     window.location.replace('createAccount.html');
 }
 
 function viewTransactions(accountType) {
