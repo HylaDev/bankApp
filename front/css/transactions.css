@@ -103,14 +103,21 @@ body, html {
   }
   
   form input,
-  form select {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+form select {
+  display: block;
+  box-sizing: border-box; 
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem; 
+  background-color: #fff; 
+  outline: none; 
+}
+
+
+  
  
   
   form button {
