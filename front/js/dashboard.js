@@ -1,26 +1,10 @@
 const API_URL = 'http://localhost:3000';
 let currentTransactions = [];
-function logout() {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_email');
-    localStorage.removeItem('user_name');
-
-    window.location.replace('login.html');
-}
-
+const token = localStorage.getItem('auth_token');
 $(document).ready(function() {
-    const token = localStorage.getItem('auth_token');
-
-    if (!token) {
-        alert("Vous devez être connecté pour accéder au tableau de bord.");
-        window.location.replace('login.html');
-        return;
-    }
-
     loadUserProfile(token);
     loadTotalBalance(token);
 });
-
 function loadUserProfile(token) {
     $.ajax({
         url: `${API_URL}/users/profile`,
@@ -50,7 +34,11 @@ function loadTotalBalance(token) {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${token}` },
         success: function(response) {
-            $('#total-balance').text(`${response.totalBalance.toFixed(2)}€`);
+            if (response.totalBalance !== undefined) {
+                $('#total-balance').text(`${response.totalBalance}€`);
+            } else {
+                $('#total-balance').text("0€"); // Si aucun compte, affiche 0€
+            }
         },
         error: function(error) {
             console.error("Erreur lors du chargement du solde total :", error);
@@ -58,6 +46,7 @@ function loadTotalBalance(token) {
         }
     });
 }
+
 
 function displayAccounts(accounts) {
     let accountsHtml = '';
@@ -82,7 +71,7 @@ function displayAccounts(accounts) {
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Compte ${account.accountType}</h5>
-                            <p class="card-text">${account.balance.toFixed(2)}€</p>
+                            <p class="card-text">${account.balance}€</p>
                             <button class="btn btn-success" onclick="viewTransactions('${account.accountType}')">Voir les transactions</button>
                             <button class="btn btn-warning ml-2" onclick="defineThreshold('${account.accountType}', ${account.threshold || 0})">Définir le seuil</button>
                             <button class="btn btn-danger ml-2" onclick="deleteAccount('${account.accountNumber}')" ${deleteButtonDisabled}>Supprimer le compte</button>
@@ -98,37 +87,56 @@ function displayAccounts(accounts) {
 
 function displayTransactions(accounts) {
     let transactionsHtml = '';
-    let hasTransactions = false;
+    let allTransactions = [];
 
+    // toutes les transactions de tous les comptes
     if (Array.isArray(accounts)) {
         accounts.forEach(account => {
             if (account.transactions && account.transactions.length > 0) {
-                hasTransactions = true;
-                account.transactions.forEach(transaction => {
-                    transactionsHtml += `
-                        <tr>
-                            <td>${transaction.date}</td>
-                            <td>${transaction.transactionType === "Depot" ? '+' : '-'}${transaction.amount}€</td>
-                            <td>${transaction.transactionType}</td>
-                        </tr>
-                    `;
-                });
+                allTransactions = allTransactions.concat(account.transactions.map(transaction => ({
+                    ...transaction,
+                    accountType: account.accountType 
+                })));
             }
         });
     }
 
-    if (hasTransactions) {
-        $('#transactions-table-body').html(transactionsHtml);
+    // Trie les transactions par date
+    allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // 3 dernières transactions
+    const recentTransactions = allTransactions.slice(0, 3);
+
+    // Génère le HTML pour chaque transaction
+    if (recentTransactions.length > 0) {
+        recentTransactions.forEach(transaction => {
+            const formattedDate = new Date(transaction.date).toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+            });
+            transactionsHtml += `
+                <tr>
+                    <td>${formattedDate}</td>
+                    <td>${transaction.transactionType === "Depot" ? '+' : '-'}${transaction.amount}€</td>
+                    <td>${transaction.accountType}</td>
+                </tr>
+            `;
+        });
     } else {
-        $('#transactions-table-body').html('<tr><td colspan="4" class="text-center">Pas de transactions disponibles</td></tr>');
+        transactionsHtml = '<tr><td colspan="4" class="text-center">Pas de transactions disponibles</td></tr>';
     }
+
+    $('#transactions-table-body').html(transactionsHtml);
 }
+
 
 function createAccount() {
      window.location.replace('createAccount.html');
 }
 
 function viewTransactions(accountType) {
+    $('#transactionAccountType').text(accountType);
     const email = localStorage.getItem('user_email');
 
     $.ajax({
@@ -299,9 +307,9 @@ function downloadCSV() {
 }
 
 function generateCSV(transactions) {
-    let csv = 'Date,Type,Montant,Solde après transaction\n';
+    let csv = 'Date,Type,Montant,Solde du compte';
     transactions.forEach(transaction => {
-        csv += `${transaction.date},${transaction.transactionType},${transaction.amount},${transaction.balanceAfterTransaction || 'N/A'}\n`;
+        csv += `${transaction.date},${transaction.transactionType},${transaction.amount},${transaction.newBalance || 'N/A'}\n`;
     });
     return csv;
 }

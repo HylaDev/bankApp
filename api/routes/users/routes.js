@@ -52,7 +52,8 @@ const router = express.Router();
       pass: newUser.password,
     };
     const userToken = await generateJwt(payload);
-    res.cookie("auth_token", userToken, { httpOnly: true});
+    //sameSite pour empêcher les attaques CSRF
+    res.cookie("auth_token", userToken, { httpOnly: true, secure: true, sameSite: 'strict' });
 
     res.status(201).json({ message: 'Inscription avec succès .', user: newUser.email, userToken: userToken});
 });
@@ -85,8 +86,8 @@ router.get("/profile", isAuthenticated, async (req, res) => {
       return res.status(404).json({message: "user not exist"});
     }
     const user = users.find((user) => user.email === email );
+    console.log(user);
     const checkPassword = await checkPass(email, password);
-    console.log(checkPassword)
     if(checkPassword){
       const payload = {
         name: user.name,
@@ -94,7 +95,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
         pass: user.password,
       };
       const userToken = await generateJwt(payload);
-      res.cookie("auth_token", userToken, { httpOnly: true});
+      res.cookie("auth_token", userToken, { httpOnly: true, secure: true, sameSite: 'strict' });
       return res.status(200).json({message:"Vous êtes bien connecté", userToken:userToken, userEmail:user.email, userName:user.name})
     }
     return res.status(409).json({message:"connexion echouée"})
@@ -185,64 +186,78 @@ router.get("/profile", isAuthenticated, async (req, res) => {
     res.status(200).json(user.accounts);
   });
 
-  // add transaction to user
-  router.post("/add/transaction", isAuthenticated, async (req, res) =>{
-    const {email, accountType, transactionType, amount} = req.body;
+// add transaction to user
+router.post("/add/transaction", isAuthenticated, async (req, res) => {
+  const { email, accountType, transactionType, amount } = req.body;
 
-    if (!email || !transactionType || !amount){
-      res.status(400).json({message: "email, transactionType, amount and date are required"});
-    }
+  if (!email || !transactionType || !amount) {
+      return res.status(400).json({ message: "email, transactionType, and amount are required" });
+  }
 
-    const parsedAmount = parseFloat(amount);
-    if (isNaN(parsedAmount) || parsedAmount <= 0) {
-        return res.status(400).json({ message: "Montant invalide, il doit être supérieur à zéro." });
-    }
+  const parsedAmount = parseFloat(amount);
+  if (isNaN(parsedAmount) || parsedAmount <= 0) {
+      return res.status(400).json({ message: "Montant invalide, il doit être supérieur à zéro." });
+  }
 
-    const users = readData();
-    const user = users.find((user) => user.email === email);
-    if(!user){
-      return res.status(404).json({message:"user not found"});
-    }
-    if (!user.accounts){
-      res.status(404).json({message:"Vous n'avez pas de compte"})
-    }
+  const users = readData();
+  const user = users.find((user) => user.email === email);
+  if (!user) {
+      return res.status(404).json({ message: "user not found" });
+  }
+  if (!user.accounts) {
+      return res.status(404).json({ message: "Vous n'avez pas de compte" });
+  }
 
-    const account = user.accounts.find((acc) => acc.accountType == accountType);
-    if(!account){
-      res.status(404).json({message:"Vous n'avez pas ce type de compte"})
-    }
+  const account = user.accounts.find((acc) => acc.accountType == accountType);
+  if (!account) {
+      return res.status(404).json({ message: "Vous n'avez pas ce type de compte" });
+  }
 
-    if (!account.transactions) {
+  if (!account.transactions) {
       account.transactions = [];
-    }
-    let newBalance = account.balance;
-    if (transactionType === "Retrait") {
-        if (newBalance < parsedAmount) {
-            return res.status(400).json({ message: "Votre solde est insufisant" });
-        }
-        newBalance -= parsedAmount;
-    } else if (transactionType === "Depot") {
-      newBalance += parsedAmount;
-    } else {
-        return res.status(400).json({ message: "Ce type de transaction n'existe pas" });
-    }
+  }
 
-    const userTransaction = {
-      transactionType, 
+  // Convertir `account.balance` en nombre
+  let newBalance = parseFloat(account.balance);
+  if (isNaN(newBalance)) {
+      return res.status(500).json({ message: "Erreur : Le solde actuel est invalide." });
+  }
+
+  // Calculer le nouveau solde
+  if (transactionType === "Retrait") {
+      if (newBalance < parsedAmount) {
+          return res.status(400).json({ message: "Votre solde est insuffisant" });
+      }
+      newBalance -= parsedAmount;
+  } else if (transactionType === "Depot") {
+      newBalance += parsedAmount;
+  } else {
+      return res.status(400).json({ message: "Ce type de transaction n'existe pas" });
+  }
+
+  // Créer l'objet transaction
+  const userTransaction = {
+      transactionType,
       amount: parsedAmount,
       date: new Date(),
-      newBalance: newBalance
-    }
-    account.transactions.push(userTransaction);
-    account.balance = newBalance;
-    saveData(users);
-    if(newBalance < account.threshold){
-      res.status(200).json({message:"Tansaction effectuée", transaction: userTransaction, notification: "Alerte : Le solde est en dessous du seuil défini!" })
+      newBalance: newBalance 
+  };
 
-    }
-    res.status(200).json({message:"Tansaction effectuée", transaction: userTransaction })
+  account.transactions.push(userTransaction);
+  account.balance = newBalance; 
 
-  })
+  // Sauvegarder les données
+  saveData(users);
+
+  // Vérification du seuil et notification si nécessaire
+  if (newBalance < account.threshold) {
+      return res.status(200).json({ message: "Transaction effectuée", transaction: userTransaction, notification: "Alerte : Le solde est en dessous du seuil défini!" });
+  }
+
+  // Retourner la réponse de succès
+  res.status(200).json({ message: "Transaction effectuée", transaction: userTransaction });
+});
+
 
   // transactions historisque
 
@@ -302,14 +317,17 @@ router.get("/profile", isAuthenticated, async (req, res) => {
         return res.status(404).json({ message: "User not found" });
     }
 
-    if (!user.accounts || !Array.isArray(user.accounts)) {
-        return res.status(404).json({ message: "Vous n'avez pas de compte" });
-    }
+    if (!user.accounts || !Array.isArray(user.accounts) || user.accounts.length === 0) {
+      return res.status(200).json({ totalBalance: "0.00" });
+  }
 
-    const totalBalance = user.accounts.reduce((sum, account) => sum + account.balance, 0);
-    
+    //  parseFloat pour convertir chaque balance en nombre
+    const totalBalance = user.accounts.reduce((sum, account) => parseFloat(sum) + parseFloat(account.balance), 0);
+
+    console.log(totalBalance);
     res.status(200).json({ totalBalance });
-  });
+});
+
 
   router.delete("/delete/account", async (req, res) => {
     const { email, accountNumber } = req.body;

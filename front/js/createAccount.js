@@ -1,11 +1,5 @@
 const API_URL = 'http://localhost:3000';  
-function logout() {
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('user_email');
-  localStorage.removeItem('user_name');
 
-  window.location.replace('login.html');
-}
 function displayAccountMessage(message, success = false) {
   const outputDiv = document.getElementById('accountMessage');
   outputDiv.textContent = message;
@@ -40,9 +34,10 @@ function addAccount(event) {
       if (xhr.status === 201) {
         console.log("check me");
         displayAccountMessage(response.message, true);
-      setTimeout(() => {
-        window.location.href = 'dashbord.html'; 
-      }, 2000); 
+        window.location.href = 'dashboard.html';
+      // setTimeout(() => {
+      //   window.location.href = 'dashboard.html'; 
+      // }, 2000); 
       } else {
         displayAccountMessage(response.message || 'Erreur de création de compte', false);
       }

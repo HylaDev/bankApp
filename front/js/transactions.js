@@ -1,12 +1,5 @@
 const API_URL = 'http://localhost:3000';
 
-function logout() {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_email');
-    localStorage.removeItem('user_name');
-
-    window.location.replace('login.html');
-}
 function displayTransactionMessage(message, success = false){
     const outputDiv = document.getElementById('transactionMessage');
     outputDiv.textContent = message;
@@ -39,9 +32,10 @@ const xhr = new XMLHttpRequest();
 
             if (xhr.status === 200) {
                 displayTransactionMessage(response.message, true);
-                setTimeout(() => {
-                    window.location.href = 'dashbord.html';
-                }, 2000);
+                window.location.href = 'dashboard.html';
+                // setTimeout(() => {
+                //     window.location.href = 'dashboard.html';
+                // }, 2000);
     
             } else {
                 displayTransactionMessage(response.message || 'Erreur lors de l\'ajout de la transaction', false);
@@ -58,7 +52,6 @@ const xhr = new XMLHttpRequest();
         
     });
 
-    console.log("Requête envoyee : ", data);
     xhr.send(data);
 }
 document.getElementById('transactionForm').addEventListener('submit', addTransaction);

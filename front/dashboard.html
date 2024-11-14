@@ -9,32 +9,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">BankApp</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#index.html">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="createAccount.html">Comptes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="transactions.html">Transactions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profil.html">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-danger" href="#" onclick="logout()">Déconnexion</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
+        <div id="navbar-container"></div>
         <!-- Bienvenue et Nom de l'utilisateur -->
         <div class="jumbotron text-center mt-4">
             <h1 class="display-4">Bienvenue, <span id="user-name"></span></h1>
@@ -63,7 +38,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Montant</th>
-                                    <th>Type</th>
+                                    <th>Compte</th>
                                 </tr>
                             </thead>
                             <tbody id="transactions-table-body">
@@ -92,7 +67,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="transactionHistoryModalLabel">Historique des Transactions</h5>
+                        <h5 class="modal-title" id="transactionHistoryModalLabel">Historique des transactions pour le compte <span id="transactionAccountType"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -149,7 +124,7 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="thresholdModalLabel">Définir le seuil</h5>
+                <h5 class="modal-title" id="thresholdModalLabel">Définir le seuil  pour le compte <span id="thresholdAccountType"></span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -174,6 +149,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/dashbord.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script> 
 </body>
 </html>

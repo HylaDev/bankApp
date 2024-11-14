@@ -1,275 +1,71 @@
 [
   {
-    "name": "baltazr",
-    "email": "alice.dupont@gmail.com",
-    "password": "$2b$10$ql6Z3lDQXPs/BXRTMUhxseDGvkw/3IaBnq3OTwSXuCjHvCLlMUnae",
-    "accounts": [
-      {
-        "accountNumber": "ACC-1731443883171",
-        "accountType": "épargne",
-        "balance": 0
-      },
-      {
-        "accountNumber": "ACC-1731444255402",
-        "accountType": "épargne",
-        "balance": 20
-      }
-    ]
-  },
-  {
-    "name": "dos",
-    "email": "t@d",
-    "password": "$2b$10$QQORRhXmcruB3jnMGTBzbu0uqbHMlkUNRpneEPp41j7wbdSfcBMO2",
-    "transactions": [
-      {
-        "transactionType": "retrait",
-        "amount": 20,
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": 20,
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": 20,
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      },
-      {
-        "transactionType": "retrait",
-        "amount": "20",
-        "date": "date"
-      }
-    ],
-    "accounts": [
-      {
-        "accountNumber": "ACC-1731496261440",
-        "accountType": "épargne",
-        "balance": 20
-      },
-      {
-        "accountNumber": "ACC-1731514408629",
-        "accountType": "épargne",
-        "balance": 20,
-        "threshold": 50
-      }
-    ]
-  },
-  {
-    "name": "jennifer comlanvi",
-    "email": "comlanviida@yahoo.fr",
-    "password": "$2b$10$ulrzNp/cTq4XsKDVvGl98OFgFfzVTq.ld01fEOpV.1EbLVzwGYoC."
-  },
-  {
-    "name": "Yas boto",
-    "email": "yas@gmail.com",
-    "password": "$2b$10$b3mxlInFjf7Jcimq.vLp/.cHd.sCANK84Ovo2Sxwu5w6Bnvhc3aMG"
-  },
-  {
-    "name": "geeer",
-    "email": "ggg@gmail.com",
-    "password": "$2b$10$o2hCrkI2oVSoFMIYV1qTjefxlix3IWLOaq55z/Ve6pHsDFJQy/Aji"
-  },
-  {
-    "name": "tedst",
-    "email": "t@i.com",
-    "password": "$2b$10$pQNwXmlH4NvVj4aBekN8EeAG6IHNx/IBCyR4p0o29MAMhrDPFVuPi"
-  },
-  {
-    "name": "jennila",
-    "email": "jenn@yahoo.fr",
-    "password": "$2b$10$CZjlYTBJXtnEAVY6pACyo.cgLQYD1Bn1l6ndxi0cY66L6y.QgTdI6"
-  },
-  {
-    "name": "jennifer COMLANVI",
-    "email": "jennifer.comlanvi@gmail.com",
-    "password": "$2b$10$DXpBCkEgxPaF7UII/vkKxO7WZGrMiFMd3d1jYycxuOqOxDZc3.jSW"
-  },
-  {
-    "name": "jennifer COMLANVI",
-    "email": "jennifer@gmail.com",
-    "password": "$2b$10$wNwrw3xQ0z9SSNTpFwblv.fAoB5gku1QeBRZ80xsNmKnLYJwYCSTu"
-  },
-  {
-    "name": "yasaa",
-    "email": "uaaa@gmail.com",
-    "password": "$2b$10$Sbg4JZa0Z.X3OiSvjKF1DucG42NvmGuGU.RHua/9NCQwpvHTmNdLW"
-  },
-  {
-    "name": "fbvxcfvxcv",
-    "email": "sdgdfg@gmail.com",
-    "password": "$2b$10$1xfXxU/T7Qb4KDKs.aCLtOfIGcmcQ2SIiJZNs3n4ckItpjrwB2Swa"
-  },
-  {
-    "name": "jennifer COMLANVI",
-    "email": "comlanviid5a@yahoo.fr",
-    "password": "$2b$10$rAd0ldobVvWmJ6wwveA0TOuAuhVYC5OZQ0eUTT6VYpfHY.4p9jqW6"
-  },
-  {
-    "name": "dododo",
-    "email": "do@gmail.com",
-    "password": "$2b$10$xKRIzG.jiYXEGlgZFFSci.yxVkUfmCqvlawqIlzN7S2IIecsFTxVy"
-  },
-  {
-    "name": "bfgcbfc",
-    "email": "fddxvx@gmail.com",
-    "password": "$2b$10$Mx53wi.QH5Li5spYmxmcNelV7x74zvYVDqUwO/07AdFxd0imKVWB2"
-  },
-  {
-    "name": "jennifer COMLANVI",
-    "email": "comlanviidbgfa@yahoo.fr",
-    "password": "$2b$10$l0nylLh2X1hDCtp6y2J6kuh5Luwq3a9EZLci/ygmo9vMaSjw0NY/K"
-  },
-  {
-    "name": "dhdfcxgdfv",
-    "email": "fthfg@ghg.com",
-    "password": "$2b$10$s7ipT6DQMoiYwBBgzJTMpuTN3fBMj35UfzYj5QxbC8/5pnm/Xfaeu"
-  },
-  {
-    "name": "dxvdwxc",
-    "email": "ddd@yahoo.fr",
-    "password": "$2b$10$67/rjHtqhrOHsMj5yP2V.efHvcIZ1T46BxwjdXmoq1vKdqSln2mBy"
-  },
-  {
-    "name": "xfvjn",
-    "email": "dfbjkl@gmzsdk.com",
-    "password": "$2b$10$AhHVDeU8nSrfbDJpLpPk1.NBTv09sQ69kMgs7kCl0tOyG23p3ykaK"
-  },
-  {
-    "name": "fdjbfj,",
-    "email": "fdjngdf@gmail.com",
-    "password": "$2b$10$U8Ky9acUhPXYcx8JPR7WQutA1Wa1EsJ0Z/W5sP0/f/hSEjdZ5nU5C"
-  },
-  {
-    "name": "jennifer COMLANVI",
-    "email": "comlanvdgdiida@yahoo.fr",
-    "password": "$2b$10$AzyIJnmTjh.vWX/iF7kqnea3GN/L90kAIoA59QXqvhgSo3Fd.rFLm"
-  },
-  {
-    "name": "yasminedah",
-    "email": "yasminedah@gmail.com",
-    "password": "$2b$10$2gee7.WWbZwRGmHMOsvWfOzzgyuepPRqhFqXrrx9evWM0SYm318Ji"
-  },
-  {
-    "name": "yaya",
+    "name": "Yasmine",
     "email": "yaya@gmail.com",
-    "password": "$2b$10$sgTqamxE7SqD9lJAqfYDLOLxYELstRn49srC61ug33ZZeS5JvRiam",
+    "password": "$2b$10$4bPnXfGqDyG1u/5eRRl5euItgTQvt4h42hqbQOCq49KpRaD9sfVoK",
     "accounts": [
       {
-        "accountNumber": "ACC-1731843883171",
+        "accountNumber": "ACC-1731619065473",
         "accountType": "Epargne",
         "balance": 450,
-        "threshold": 100,
-        "transactions": [
-          {
-            "transactionType": "Retrait",
-            "amount": "20",
-            "date": "2024-11-14T09:42:01.726Z",
-            "newBalance": 11
-          },
-          {
-            "transactionType": "Depot",
-            "amount": 200,
-            "date": "2024-11-14T09:42:01.726Z",
-            "newBalance": 11
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "test",
-    "email": "tom@gmail.com",
-    "password": "$2b$10$IFaHm6FJm/S5wJdZJCm1dezwyqnRiupppCfTPLzFpYZ887q6mAoke",
-    "accounts": [
-      {
-        "accountNumber": "YEJ-1731574824732",
-        "accountType": "Courant",
-        "balance": 20,
-        "threshold": 50.03,
-        "transactions": [
-          {
-            "transactionType": "Depot",
-            "amount": 10,
-            "date": "2024-11-14"
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 40,
-            "date": "2024-11-14"
-          }
-        ]
-      },
-      {
-        "accountNumber": "YEJ-1731575039875",
-        "accountType": "Epargne",
-        "balance": 16,
-        "threshold": 50,
         "transactions": [
           {
             "transactionType": "Retrait",
             "amount": 50,
-            "date": "2024-11-14"
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 10,
-            "date": "2024-11-14T09:41:33.067Z",
-            "newBalance": 6
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 5,
-            "date": "2024-11-14T09:42:01.726Z",
-            "newBalance": 11
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 16,
-            "date": "2024-11-14T09:45:48.259Z",
-            "newBalance": 0
-          },
-          {
-            "transactionType": "Depot",
-            "amount": 200,
-            "date": "2024-11-14T09:53:41.653Z",
-            "newBalance": 216
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 200,
-            "date": "2024-11-14T09:54:10.799Z",
-            "newBalance": 16
+            "date": "2024-11-14T21:55:45.280Z",
+            "newBalance": 450
           }
         ]
       }
     ]
   },
   {
-    "name": "Thomas",
-    "email": "thomas@gmail.com",
-    "password": "$2b$10$NRQeN0P6eh1yM49Ii8FyD.VT6yQdOmz.gJEgY.PRj2P6HHXY74O9y"
+    "name": "jennifer COMLANVI",
+    "email": "comlanviida@yahoo.fr",
+    "password": "$2b$10$MUPyhms/U2umk3Vm9zXa4uo8ShZ06.BV29RnEBuqyhe33ze4PElVK",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731616793462",
+        "accountType": "Courant",
+        "balance": 1100,
+        "threshold": 100,
+        "transactions": [
+          {
+            "transactionType": "Depot",
+            "amount": 500,
+            "date": "2024-11-14T20:46:53.712Z",
+            "newBalance": "100"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 500,
+            "date": "2024-11-14T20:47:51.109Z",
+            "newBalance": "100"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 100,
+            "date": "2024-11-14T20:53:32.297Z",
+            "newBalance": 600
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 500,
+            "date": "2024-11-14T21:06:38.981Z",
+            "newBalance": 1100
+          }
+        ]
+      }
+    ]
   },
   {
-    "name": "Thomas",
-    "email": "pop@smoke.com",
-    "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq",
-    "accounts": []
+    "name": "jennifer COMLANVI",
+    "email": "ida@yahoo.fr",
+    "password": "$2b$10$/wWCAsUja/PsmO.z5ZJHqexSE2iuFiD4FqV.etVyoM8QYl6tMgWXu"
+  },
+  {
+    "name": "jennifer COMLANVI",
+    "email": "com@yahoo.fr",
+    "password": "$2b$10$IYE41k7TM4dUM6BMp6gcAeD1kWtrUjNtwKSoI0oAaMf51gr.uOhNO"
   }
 ]
