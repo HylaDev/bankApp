@@ -97,12 +97,35 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
   // Logout user
   router.post("/logout", isAuthenticated, (req, res) => {
-    // Effacez le cookie contenant le jeton JWT
     res.clearCookie("auth_token", { httpOnly: true, secure: true });
     
     res.status(200).json({ message: "Déconnexion avec succès" });
   });
 
+  // update profil
+  router.put("/profile", (req, res) => {
+    const { email, name } = req.body;
+  
+    if (!email || !name) {
+      return res.status(400).json({ message: "Email and name are required" });
+    }
+  
+    let users = readData();
+    const userIndex = users.findIndex((u) => u.email === email);
+  
+    if (userIndex === -1) {
+      return res.status(404).json({ message: "L'utilisateur n'existe pas" });
+    }
+    
+    users[userIndex].name = name;
+  
+    saveData(users);
+  
+    return res.status(200).json({
+      message: "Information mis à jour avec succès",
+      updatedName: users[userIndex].name
+    });
+  });
 
   // create bank account for user
   router.post('/create-account', (req, res) => {
