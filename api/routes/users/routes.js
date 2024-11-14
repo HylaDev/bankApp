@@ -280,8 +280,48 @@ router.get("/profile", isAuthenticated, async (req, res) => {
     }
 
     const totalBalance = user.accounts.reduce((sum, account) => sum + account.balance, 0);
-
+    
     res.status(200).json({ totalBalance });
+  });
+
+  router.delete("/delete/account", async (req, res) => {
+    const { email, accountNumber } = req.body;
+  
+    if (!email || !accountNumber) {
+      return res.status(400).json({ message: "Tous les champs sont obligatoire" });
+    }
+  
+    let users = readData();
+    const user = users.find((u) => u.email === email);
+  
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+  
+    const account = user.accounts.findIndex((acc) => acc.accountNumber === accountNumber);
+  
+    if (account === -1) {
+      return res.status(404).json({ message: "Ce compte n'existe pas" });
+    }
+  
+    const accountToDelete = user.accounts[account];
+  
+    
+    if (accountToDelete.balance > 0) {
+      return res.status(400).json({
+        message: "Impossible de supprimer ce compte car le solde est supérieur à 0.",
+        balance: accountToDelete.balance
+      });
+    }
+  
+    user.accounts.splice(account, 1);
+    saveData(users);
+  
+    return res.status(200).json({
+      message: "Compte supprimé avec succès",
+      deletedAccountNumber: accountNumber,
+      updatedTotalBalance: user.accounts.reduce((total, acc) => total + acc.balance, 0)
+    });
   });
 
 

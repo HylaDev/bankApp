@@ -283,6 +283,7 @@
   {
     "name": "Thomas",
     "email": "pop@smoke.com",
-    "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq"
+    "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq",
+    "accounts": []
   }
 ]
