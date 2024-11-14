@@ -28,16 +28,13 @@ function loadUserProfile(token) {
             const user = response.user;
             $('#profileName').val(user.name);
             $('#profileEmail').val(user.email);
-        },
-        error: function(error) {
-            console.error("Erreur lors du chargement du profil :", error);
-            alert("Erreur de chargement du profil. Veuillez vous reconnecter.");
         }
     });
 }
 
 function updateUserProfile(token) {
     const updatedName = $('#profileName').val();
+    const email = $('#profileEmail').val();
 
     $.ajax({
         url: `${API_URL}/users/profile`,
@@ -46,10 +43,10 @@ function updateUserProfile(token) {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-        data: JSON.stringify({ name: updatedName }),
+        data: JSON.stringify({ email ,name: updatedName }),
         success: function(response) {
             $('#updateMessage').show();
-            setTimeout(() => $('#updateMessage').hide(), 3000);
+            //setTimeout(() => $('#updateMessage').hide(), 3000);
         },
         error: function(error) {
             console.error("Erreur lors de la mise à jour du profil :", error);
