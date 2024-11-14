@@ -186,7 +186,7 @@
       {
         "accountNumber": "ACC-1731843883171",
         "accountType": "Epargne",
-        "balance": 350,
+        "balance": 1350,
         "transactions": [
           {
             "transactionType": "Retrait",
@@ -202,18 +202,34 @@
             "transactionType": "Retrait",
             "amount": 100,
             "date": "2024-11-14"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 1000
           }
         ]
       },
       {
         "accountNumber": "ACC-1731444255402",
         "accountType": "Courant",
-        "balance": 270,
+        "balance": 1970,
         "transactions": [
           {
             "transactionType": "Depot",
             "amount": 250,
             "date": "2024-11-14"
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 100
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 100
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 1500
           }
         ]
       }

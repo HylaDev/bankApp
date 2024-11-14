@@ -90,7 +90,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
       };
       const userToken = await generateJwt(payload);
       res.cookie("auth_token", userToken, { httpOnly: true});
-      return res.status(200).json({message:"user login", userToken:userToken, userEmail:user.email, userName:user.name})
+      return res.status(200).json({message:"vous êtes connecté ! ", userToken:userToken, userEmail:user.email, userName:user.name})
     }
     return res.status(409).json({message:"connexion echouée"})
 
@@ -163,8 +163,8 @@ router.get("/profile", isAuthenticated, async (req, res) => {
     const {email, accountType, transactionType, amount, date} = req.body;
 
 
-    if (!email || !transactionType || !amount || !date){
-      res.status(400).json({message: "email, transactionType, amount and date are required"});
+    if (!email || !transactionType || !amount ){
+      res.status(400).json({message: "email, transactionType, amount are required"});
     }
 
     const parsedAmount = parseFloat(amount);
