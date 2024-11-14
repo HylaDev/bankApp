@@ -57,6 +57,20 @@ const router = express.Router();
     res.status(201).json({ message: 'Inscription avec succès .', user: newUser.email, userToken: userToken});
 });
 
+router.get("/profile", isAuthenticated, async (req, res) => {
+  const email = req.user.email;
+
+  const users = readData();
+  const user = users.find((user) => user.email === email);
+
+  if (!user) {
+      return res.status(404).json({ message: "User not found" });
+  }
+
+  res.status(200).json({ user: user });
+});
+
+
   // login user
   router.post("/login", async (req, res) =>{
     const {email, password} = req.body;

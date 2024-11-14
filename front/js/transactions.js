@@ -1,4 +1,12 @@
 const API_URL = 'http://localhost:3000';
+
+function logout() {
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_name');
+
+    window.location.replace('login.html');
+}
 function displayTransactionMessage(message, success = false){
     const outputDiv = document.getElementById('transactionMessage');
     outputDiv.textContent = message;

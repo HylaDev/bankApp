@@ -34,6 +34,7 @@ function loadUserProfile(token) {
             displayAccounts(user.accounts || []);
 
             displayTransactions(user.accounts || []);
+            checkLowBalance(user.accounts || []);
         },
         error: function(error) {
             console.error("Erreur lors du chargement du profil :", error);
@@ -74,6 +75,8 @@ function displayAccounts(accounts) {
         `;
     } else {
         accounts.forEach(account => {
+            // Si le solde est supérieur à zéro, le bouton de suppression sera désactivé
+            const deleteButtonDisabled = account.balance > 0 ? 'disabled' : '';
             accountsHtml += `
                 <div class="col-md-6">
                     <div class="card mb-4 shadow-sm">
@@ -82,7 +85,7 @@ function displayAccounts(accounts) {
                             <p class="card-text">${account.balance.toFixed(2)}€</p>
                             <button class="btn btn-success" onclick="viewTransactions('${account.accountType}')">Voir les transactions</button>
                             <button class="btn btn-warning ml-2" onclick="defineThreshold('${account.accountType}', ${account.threshold || 0})">Définir le seuil</button>
-                            <button class="btn btn-danger ml-2" onclick="deleteAccount('${account.accountType}')">Supprimer le compte</button>
+                            <button class="btn btn-danger ml-2" onclick="deleteAccount('${account.accountType}')" ${deleteButtonDisabled}>Supprimer le compte</button>
                         </div>
                     </div>
                 </div>
@@ -206,7 +209,24 @@ function saveThreshold() {
 }
 
 
+function checkLowBalance(accounts) {
+    let lowBalanceDetected = false;
+    let lowBalanceAccountType = '';
 
+    accounts.forEach(account => {
+        if (account.threshold && account.balance < account.threshold) {
+            lowBalanceDetected = true;
+            lowBalanceAccountType = account.accountType;
+        }
+    });
+
+    if (lowBalanceDetected) {
+        $('#low-balance-alert').show();
+        $('#low-balance-account-type').text(lowBalanceAccountType);
+    } else {
+        $('#low-balance-alert').hide();
+    }
+}
 function displayTransactionHistory(transactions) {
     const transactionHistoryTable = $('#transactionHistoryTable');
     transactionHistoryTable.empty();
@@ -216,12 +236,18 @@ function displayTransactionHistory(transactions) {
     } else {
         $('#noTransactionsMessage').hide();
         transactions.forEach(transaction => {
+            // Convertit la date ISO en une date lisible en français
+            const formattedDate = new Date(transaction.date).toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+            });
             transactionHistoryTable.append(`
                 <tr>
-                    <td>${transaction.date}</td>
+                    <td>${formattedDate}</td>
                     <td>${transaction.transactionType}</td>
                     <td>${transaction.transactionType === 'Depot' ? '+' : '-'}${transaction.amount}€</td>
-                    <td>${transaction.balanceAfterTransaction || 'N/A'}€</td>
+                    <td>${transaction.newBalance || 'N/A'}€</td>
                 </tr>
             `);
         });

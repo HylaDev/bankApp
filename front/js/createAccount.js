@@ -1,5 +1,11 @@
 const API_URL = 'http://localhost:3000';  
+function logout() {
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('user_email');
+  localStorage.removeItem('user_name');
 
+  window.location.replace('login.html');
+}
 function displayAccountMessage(message, success = false) {
   const outputDiv = document.getElementById('accountMessage');
   outputDiv.textContent = message;

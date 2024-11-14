@@ -180,12 +180,14 @@
           {
             "transactionType": "Retrait",
             "amount": "20",
-            "date": "date"
+            "date": "2024-11-14T09:42:01.726Z",
+            "newBalance": 11
           },
           {
             "transactionType": "Depot",
             "amount": 200,
-            "date": "date"
+            "date": "2024-11-14T09:42:01.726Z",
+            "newBalance": 11
           }
         ]
       },
@@ -193,7 +195,7 @@
         "accountNumber": "ACC-1731444255402",
         "accountType": "Courant",
         "balance": 20,
-        "threshold": 80
+        "threshold": 100
       }
     ]
   },
