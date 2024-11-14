@@ -20,19 +20,11 @@ const saveData = (data) => {
 
 const router = express.Router();
 
-router.get("/profile", isAuthenticated, async (req, res) => {
-  const email = req.user.email;
-
-  const users = readData();
-  const user = users.find((user) => user.email === email);
-
-  if (!user) {
-      return res.status(404).json({ message: "User not found" });
-  }
-  
-  res.status(200).json({ user: user });
-});
-
+  // list users
+  router.get("/", (req, res) => {
+    const users = readData();
+    res.status(200).json(users);
+    });
   
     // create users
   router.post('/register', async (req, res) => {
@@ -95,13 +87,16 @@ router.get("/profile", isAuthenticated, async (req, res) => {
 
   });
 
-  // Logout user
+  // logout user
   router.post("/logout", isAuthenticated, (req, res) => {
     // Effacez le cookie contenant le jeton JWT
     res.clearCookie("auth_token", { httpOnly: true, secure: true });
     
     res.status(200).json({ message: "Déconnexion avec succès" });
   });
+
+  // update profil
+
 
 
   // create bank account for user
@@ -131,10 +126,9 @@ router.get("/profile", isAuthenticated, async (req, res) => {
       return res.status(404).json({ message: 'Ce compte type existe déjà.' });
     }
     const newAccount = {
-        accountNumber: `YEJ-${Date.now()}`,
+        accountNumber: `ACC-${Date.now()}`,
         accountType,
-        balance: parsedInitialB,
-        threshold: 50,
+        balance: initialBalance
     };
 
     user.accounts.push(newAccount);
@@ -160,7 +154,6 @@ router.get("/profile", isAuthenticated, async (req, res) => {
   // add transaction to user
   router.post("/add/transaction", isAuthenticated, async (req, res) =>{
     const {email, accountType, transactionType, amount} = req.body;
-
 
     if (!email || !transactionType || !amount){
       res.status(400).json({message: "email, transactionType, amount and date are required"});
@@ -323,6 +316,7 @@ router.get("/profile", isAuthenticated, async (req, res) => {
       updatedTotalBalance: user.accounts.reduce((total, acc) => total + acc.balance, 0)
     });
   });
+
 
 
  export default router;
