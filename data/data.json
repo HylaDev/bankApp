@@ -194,33 +194,15 @@
     ]
   },
   {
-    "name": "test",
+    "name": "POPO",
     "email": "tom@gmail.com",
     "password": "$2b$10$IFaHm6FJm/S5wJdZJCm1dezwyqnRiupppCfTPLzFpYZ887q6mAoke",
     "accounts": [
       {
-        "accountNumber": "YEJ-1731574824732",
-        "accountType": "Courant",
-        "balance": 20,
-        "threshold": 50.03,
-        "transactions": [
-          {
-            "transactionType": "Depot",
-            "amount": 10,
-            "date": "2024-11-14"
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 40,
-            "date": "2024-11-14"
-          }
-        ]
-      },
-      {
         "accountNumber": "YEJ-1731575039875",
         "accountType": "Epargne",
         "balance": 16,
-        "threshold": 50,
+        "threshold": 16,
         "transactions": [
           {
             "transactionType": "Retrait",
