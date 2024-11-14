@@ -169,6 +169,12 @@
         "accountType": "Epargne",
         "balance": 100,
         "threshold": 50
+      },
+      {
+        "accountNumber": "ACC-1731573704374",
+        "accountType": "Courant",
+        "balance": 5,
+        "threshold": 50
       }
     ]
   },

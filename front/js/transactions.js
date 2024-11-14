@@ -9,13 +9,7 @@ function addTransaction(event) {
 const transactionType = document.getElementById('transactionType').value;
 const amount = document.getElementById('amount').value;
 const accountType = document.getElementById('accountType').value;
-const today = new Date().toISOString().split("T")[0];
-const dateInput = document.getElementById("date");
-
-// Définit la valeur, la date minimum et la date maximum à aujourd'hui
-dateInput.value = today;
-dateInput.min = today;
-dateInput.max = today;
+const date = document.getElementById('date').value;
 
 const token =  localStorage.getItem('auth_token');
 const email = localStorage.getItem('user_email');
@@ -56,7 +50,7 @@ const xhr = new XMLHttpRequest();
         date
     });
 
-    console.log("Requête envoyée : ", data);
+    console.log("Requête envoyee : ", data);
     xhr.send(data);
 }
 document.getElementById('transactionForm').addEventListener('submit', addTransaction);
