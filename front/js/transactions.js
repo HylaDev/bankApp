@@ -4,6 +4,15 @@ function displayTransactionMessage(message, success = false){
     outputDiv.textContent = message;
     outputDiv.style.color = success ? 'green' : 'red';   
 }
+
+function setTodayDate(){
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');  
+    const day = String(today.getDate()).padStart(2, '0'); 
+    const todayDate = `${year}-${month}-${day}`;  
+    document.getElementById('date').value = todayDate
+}
 function addTransaction(event) {
     event.preventDefault();
 const transactionType = document.getElementById('transactionType').value;
@@ -15,7 +24,7 @@ const token =  localStorage.getItem('auth_token');
 const email = localStorage.getItem('user_email');
 
 if (!token) {
-    displayTransactionMessage("Utilisateur non authentifié. Veuillez vous connecter.", false);
+    displayTransactionMessage("Utilisateur non authentifie. Veuillee vous connecter.", false);
     return;
 }
 
@@ -54,3 +63,6 @@ const xhr = new XMLHttpRequest();
     xhr.send(data);
 }
 document.getElementById('transactionForm').addEventListener('submit', addTransaction);
+document.addEventListener('DOMContentLoaded', function () {
+    setTodayDate();  
+});

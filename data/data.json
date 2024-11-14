@@ -1,29 +1,17 @@
 [
   {
     "name": "baltazr",
-    "email": "test@test.com",
+    "email": "alice.dupont@gmail.com",
     "password": "$2b$10$ql6Z3lDQXPs/BXRTMUhxseDGvkw/3IaBnq3OTwSXuCjHvCLlMUnae",
     "accounts": [
       {
         "accountNumber": "ACC-1731443883171",
-        "accountType": "Epargne",
-        "balance": 0,
-        "transactions": [
-          {
-            "transactionType": "Retrait",
-            "amount": "20",
-            "date": "date"
-          },
-          {
-            "transactionType": "Retrait",
-            "amount": 20,
-            "date": "date"
-          }
-        ]
+        "accountType": "épargne",
+        "balance": 0
       },
       {
         "accountNumber": "ACC-1731444255402",
-        "accountType": "Courant",
+        "accountType": "épargne",
         "balance": 20
       }
     ]
