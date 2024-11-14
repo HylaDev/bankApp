@@ -271,5 +271,25 @@
     "name": "jenifer",
     "email": "jenifer@gmail.com",
     "password": "$2b$10$/22LfY7Vo7Ot3No.4G.IsOrFA03rXpv0glXT/PGdf5P6FAeaEE7wO"
+  },
+  {
+    "name": "doscod",
+    "email": "doscod@gmail.com",
+    "password": "$2b$10$EAdj/18v9Z1ePOGTUsbK3OLjSVZfVypKpcqiKZj2IV3Ei3je/Sbae",
+    "accounts": [
+      {
+        "accountNumber": "YEJ-1731579956581",
+        "accountType": "Epargne",
+        "balance": 60,
+        "threshold": 50,
+        "transactions": [
+          {
+            "transactionType": "Depot",
+            "amount": 10,
+            "date": "2024-11-14"
+          }
+        ]
+      }
+    ]
   }
 ]
