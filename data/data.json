@@ -242,6 +242,36 @@
             "transactionType": "Retrait",
             "amount": 50,
             "date": "2024-11-14"
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 10,
+            "date": "2024-11-14T09:41:33.067Z",
+            "newBalance": 6
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 5,
+            "date": "2024-11-14T09:42:01.726Z",
+            "newBalance": 11
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 16,
+            "date": "2024-11-14T09:45:48.259Z",
+            "newBalance": 0
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 200,
+            "date": "2024-11-14T09:53:41.653Z",
+            "newBalance": 216
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 200,
+            "date": "2024-11-14T09:54:10.799Z",
+            "newBalance": 16
           }
         ]
       }
@@ -255,6 +285,7 @@
   {
     "name": "Thomas",
     "email": "pop@smoke.com",
-    "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq"
+    "password": "$2b$10$yGFnZ/DVzVIwHFBOaTqJoOAAeHw7qU4kjAfG2gp5Oxy4lITwOmTVq",
+    "accounts": []
   }
 ]
