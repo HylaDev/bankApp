@@ -190,12 +190,6 @@
             "newBalance": 11
           }
         ]
-      },
-      {
-        "accountNumber": "ACC-1731444255402",
-        "accountType": "Courant",
-        "balance": 20,
-        "threshold": 10
       }
     ]
   },

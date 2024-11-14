@@ -85,7 +85,7 @@ function displayAccounts(accounts) {
                             <p class="card-text">${account.balance.toFixed(2)}€</p>
                             <button class="btn btn-success" onclick="viewTransactions('${account.accountType}')">Voir les transactions</button>
                             <button class="btn btn-warning ml-2" onclick="defineThreshold('${account.accountType}', ${account.threshold || 0})">Définir le seuil</button>
-                            <button class="btn btn-danger ml-2" onclick="deleteAccount('${account.accountType}')" ${deleteButtonDisabled}>Supprimer le compte</button>
+                            <button class="btn btn-danger ml-2" onclick="deleteAccount('${account.accountNumber}')" ${deleteButtonDisabled}>Supprimer le compte</button>
                         </div>
                     </div>
                 </div>
@@ -148,15 +148,17 @@ function viewTransactions(accountType) {
     });
 }
 
-function deleteAccount(accountType) {
+function deleteAccount(accountNumber) {
+    console.log(accountNumber)
     const email = localStorage.getItem('user_email');
 
     if (confirm("Êtes-vous sûr de vouloir supprimer ce compte ? Cette action est irréversible.")) {
         $.ajax({
-            url: `${API_URL}/users/deleteAccount`,
+            url: `${API_URL}/users/delete/account`,
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('auth_token')}` },
-            data: { email: email, accountType: accountType },
+            contentType: 'application/json',
+            data: JSON.stringify({ email, accountNumber }),
             success: function(response) {
                 alert("Compte supprimé avec succès.");
                 loadUserProfile(localStorage.getItem('auth_token')); 
