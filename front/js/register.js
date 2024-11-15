@@ -61,7 +61,7 @@ $(document).ready(function() {
                 localStorage.setItem('user_email', response.userEmail);
                 localStorage.setItem('user_name', response.userName);
                 
-                window.location.href = 'dashboard.html';
+                window.location.href = 'login.html';
             },
             error: function(error) {
                 console.error(error);

@@ -67,5 +67,88 @@
     "name": "jennifer COMLANVI",
     "email": "com@yahoo.fr",
     "password": "$2b$10$IYE41k7TM4dUM6BMp6gcAeD1kWtrUjNtwKSoI0oAaMf51gr.uOhNO"
+  },
+  {
+    "name": "tay rveff",
+    "email": "tay@gmail.com",
+    "password": "$2b$10$eJnMlFeozUg5iUvPI9h03.J8A4ieK8q9yREa7r.q7US5q7a5xMoKK",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731658933268",
+        "accountType": "Epargne",
+        "balance": 900,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": 100,
+            "date": "2024-11-15T08:22:35.224Z",
+            "newBalance": 900
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "NOUDOGBESSI Jennifer",
+    "email": "gg@gmail.com",
+    "password": "$2b$10$erjqFJYXlbqo46Uru5Mqe.nzW9DmRAUAtpLxze7RrDAWrqVBKFi6e",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731662516610",
+        "accountType": "Courant",
+        "balance": 490,
+        "transactions": [
+          {
+            "transactionType": "Depot",
+            "amount": 500,
+            "date": "2024-11-15T09:23:51.415Z",
+            "newBalance": 550
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 60,
+            "date": "2024-11-15T09:24:43.763Z",
+            "newBalance": 490
+          }
+        ]
+      },
+      {
+        "accountNumber": "ACC-1731662556916",
+        "accountType": "Epargne",
+        "balance": 50250,
+        "transactions": [
+          {
+            "transactionType": "Retrait",
+            "amount": 50,
+            "date": "2024-11-15T09:24:20.292Z",
+            "newBalance": 49950
+          },
+          {
+            "transactionType": "Depot",
+            "amount": 800,
+            "date": "2024-11-15T09:25:19.222Z",
+            "newBalance": 50750
+          },
+          {
+            "transactionType": "Retrait",
+            "amount": 500,
+            "date": "2024-11-15T09:26:47.716Z",
+            "newBalance": 50250
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "yelian",
+    "email": "admin@admin.com",
+    "password": "$2b$10$4lgn3ZJl1UrMwHBK3Y13u.cS.s5DV10cQ0DTkPwNnnU07lDosBH0e",
+    "accounts": [
+      {
+        "accountNumber": "ACC-1731662976809",
+        "accountType": "Courant",
+        "balance": "85"
+      }
+    ]
   }
 ]
