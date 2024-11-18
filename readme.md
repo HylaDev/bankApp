@@ -9,8 +9,8 @@ Welcome to your bank app, the app to manage your banks accounts and transactions
 ## Installation
 1. Clone the project repository:
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
+   git clone https://github.com/HylaDev/bankApp
+   cd bankApp
    ```
 
 2. Install the required Node.js dependencies:
