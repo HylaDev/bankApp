@@ -1,0 +1,1 @@
+Welcome to your bank app, the app to manage your banks accounts and transactions.
