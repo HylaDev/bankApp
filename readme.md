@@ -1,6 +1,6 @@
 # bank app
 
-Welcome to your bank app, the app to manage your banks accounts and transactions.
+Welcome to bankApp, the app to manage your banks accounts and transactions.
 
 ## Requirements
 - Node.js (latest LTS version recommended)
